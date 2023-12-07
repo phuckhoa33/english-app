@@ -5,12 +5,16 @@ import { faBook, faClock, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTestContext } from "../../context/TestContext";
 import { useEffect } from "react";
+import testGilf from '../../assets/gif/5Tyiodiy.gif';
+import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
+import { Spinner } from "../../component/Spinner/Spinner";
 
 const cx = classNames.bind(Style);
 
 function THPTQGExams() {
   const {allTestType} = useParams();
   const {getAllTestAtTestType, tests} = useTestContext();
+  const loading = useLoadingAndTiming();
   const navigate = useNavigate();
 
 
@@ -62,48 +66,60 @@ function THPTQGExams() {
               </div>
             </div>
           </div>
-          <div className="d-flex flex-column">
-            <div className={cx("THPTQGExams-list")}>
-              {tests?.map(test => (
-                <div
-                  className={cx("row", "THPTQGExams-items", "border-top", "p-4")}
-                >
-                  <div className="col-9">
-                    <h1 className={cx("title")}>
-                      {test?.title}{" "}
-                    </h1>
-                    <small
-                      className={cx(
-                        "question-qualtity",
-                        "d-inline-block",
-                        "px-3"
-                      )}
-                    >
-                      <FontAwesomeIcon icon={faBook} className="pe-3" />
-                      {test?.requiredQuestionAmount} câu hỏi
-                    </small>
-                    <small
-                      className={cx("time-to-testing", "d-inline-block", "px-3")}
-                    >
-                      <FontAwesomeIcon icon={faClock} className="pe-3" />
-                      {test?.interval} phút
-                    </small>
-                  </div>
-                  <div className="col-3">
-                    <div className="d-flex w-100 h-100 justify-content-center align-items-center">
+          {loading?<Spinner/>: (
+            <>
+              {tests?.length > 0 ? (
+                <div className="d-flex flex-column">
+                  <div className={cx("THPTQGExams-list")}>
+                    {tests?.map(test => (
                       <div
-                        onClick={() => handleClick(test)}
-                        className={cx("btn", "button")}
+                        className={cx("row", "THPTQGExams-items", "border-top", "p-4")}
                       >
-                        Thi Thử
+                        <div className="col-9">
+                          <h1 className={cx("title")}>
+                            {test?.title}{" "}
+                          </h1>
+                          <small
+                            className={cx(
+                              "question-qualtity",
+                              "d-inline-block",
+                              "px-3"
+                            )}
+                          >
+                            <FontAwesomeIcon icon={faBook} className="pe-3" />
+                            {test?.requiredQuestionAmount} câu hỏi
+                          </small>
+                          <small
+                            className={cx("time-to-testing", "d-inline-block", "px-3")}
+                          >
+                            <FontAwesomeIcon icon={faClock} className="pe-3" />
+                            {test?.interval} phút
+                          </small>
+                        </div>
+                        <div className="col-3">
+                          <div className="d-flex w-100 h-100 justify-content-center align-items-center">
+                            <div
+                              onClick={() => handleClick(test)}
+                              className={cx("btn", "button")}
+                            >
+                              Thi Thử
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+
+                    ))}
                   </div>
                 </div>
 
-              ))}
-            </div>
-          </div>
+              ): (
+                <div>
+                  <img src={testGilf}/>
+                  <h4 style={{color: "gray", fontWeight: "bold"}}>Hiện chưa có bài test nào cho nội dung này. Bạn quay lại sau nhé</h4>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </>
