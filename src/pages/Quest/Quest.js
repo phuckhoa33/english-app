@@ -29,52 +29,53 @@ function Quest() {
 
   return (
     <div className="">
-      <div className={cx("d-none", { ["show"]: show })}>
-        <ExpEarningPopup ClicktoOpenPopup={ShowPopupHandle} />
-      </div>
-      <div
-        className={cx(
-          "container",
-          "d-flex",
-          "justify-content-center",
-          "align-items-center",
-          "flex-column"
-        )}
-      >
-        <div className={cx("quest-container")}>
-          <div className={cx("card", "quest-bange", "my-4", "p-3")}>
-            <div className="card-body">
-              <div className="row justify-content-center align-items-center">
-                <div className="col-9">
-                  <h1 className={cx("quest-bange-title", "my-3", "text-white")}>
-                    Nhận thưởng khi xong nhiệm vụ!
-                  </h1>
-                  <p
-                    className={cx(
-                      "card-text",
-                      "quest-bange-text",
-                      "my-3",
-                      "text-white"
-                    )}
-                  >
-                    Hôm nay bạn đã hoàn thành 0 trên tổng số 3 nhiệm vụ.
-                  </p>
-                </div>
-                <div className="col-3 p-3">
-                  <img
-                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
-                    className="w-100"
-                    alt=""
-                  />
+      {loading?<Spinner/>:(
+        <>
+          <div className={cx("d-none", { ["show"]: show })}>
+            <ExpEarningPopup ClicktoOpenPopup={ShowPopupHandle} />
+          </div>
+          <div
+            className={cx(
+              "container",
+              "d-flex",
+              "justify-content-center",
+              "align-items-center",
+              "flex-column"
+            )}
+          >
+            <div className={cx("quest-container")}>
+              <div className={cx("card", "quest-bange", "my-4", "p-3")}>
+                <div className="card-body">
+                  <div className="row justify-content-center align-items-center">
+                    <div className="col-9">
+                      <h1 className={cx("quest-bange-title", "my-3", "text-white")}>
+                        Nhận thưởng khi xong nhiệm vụ!
+                      </h1>
+                      <p
+                        className={cx(
+                          "card-text",
+                          "quest-bange-text",
+                          "my-3",
+                          "text-white"
+                        )}
+                      >
+                        Hôm nay bạn đã hoàn thành 0 trên tổng số 3 nhiệm vụ.
+                      </p>
+                    </div>
+                    <div className="col-3 p-3">
+                      <img
+                        src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
+                        className="w-100"
+                        alt=""
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <h1 className={cx("daily-quest-title", "my-3")}>
-            Nhiệm vụ hằng ngày
-          </h1>
-          {loading?<Spinner/>:(
-            <>
+              <h1 className={cx("daily-quest-title", "my-3")}>
+                Nhiệm vụ hằng ngày
+              </h1>
+              
               {dailyTask?.length > 0 ? (
 
                 <div className={cx("dally-quest-container")}>
@@ -143,10 +144,11 @@ function Quest() {
                   <h1 style={{color: "black"}}>Nhiệm vụ của bạn hiện chưa cập nhật. Hãy quay lại sau nhé</h1>
                 </>
               )}
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+          </div>
+        
+        </>
+      )}
     </div>
   );
 }
