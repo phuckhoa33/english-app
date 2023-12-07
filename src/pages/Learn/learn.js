@@ -51,7 +51,7 @@ function Learn() {
                     alignItems: "center",
                     width: "100%"
                   }}>
-                    <img src={loadingGif} alt="wait until the page loads" />
+                    <img style={{width: "70%"}} src={loadingGif} alt="wait until the page loads" />
       
                   </div>
                   <h1 style={{textAlign: "center", color: "grey", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
