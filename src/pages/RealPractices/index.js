@@ -24,124 +24,123 @@ function Practices() {
     navigate(`/readQuestionPage/normal/${practice?.id}`);
   }
   
-
-
+  
+  
   return (
     <>
       <div className="container justify-content-center align-items-center d-flex">
-        <div className={cx("practice-section-container")}>
-          <div className={cx("card", "card-container", "my-4")}>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-2 p-3">
-                  <img
-                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
-                    className="w-100"
-                    alt=""
-                  />
+        {loading ? <Spinner/> : (
+          <div className={cx("practice-section-container")}>
+            <div className={cx("card", "card-container", "my-4")}>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-2 p-3">
+                    <img
+                      src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
+                      className="w-100"
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-10">
+                    <p className={cx("card-text", "premium-text")}>
+                      Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
+                      độc quyền của Super
+                    </p>
+                  </div>
                 </div>
-                <div className="col-10">
-                  <p className={cx("card-text", "premium-text")}>
-                    Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
-                    độc quyền của Super
-                  </p>
-                </div>
+                <Link
+                  to={"/premium"}
+                  className={cx(
+                    "btn",
+                    "premium-btn",
+                    "w-100",
+                    "p-3",
+                    "my-3",
+                    "rounded-4"
+                  )}
+                >
+                  Bắt đầu 14 ngày dùng thử miễn phí
+                </Link>
               </div>
-              <Link
-                to={"/premium"}
-                className={cx(
-                  "btn",
-                  "premium-btn",
-                  "w-100",
-                  "p-3",
-                  "my-3",
-                  "rounded-4"
-                )}
-              >
-                Bắt đầu 14 ngày dùng thử miễn phí
-              </Link>
             </div>
-          </div>
 
-         
-          <h1
-            className={cx("advance-practice-section-sub-title", "pb-3", "ps-4")}
-          >
-            Bài kiểm tra từng block trong khóa học 
-          </h1>
-          {loading ? <Spinner/> : (
-            <>
-              {practices?.length > 0 ? (
-                <div className="d-flex flex-column">
-                  {practices?.map(practice => (
-                    <div
-                      className={cx(
-                        "ielts-section",
-                        "pratice-section",
-                        "p-4",
-                        "border-top"
-                      )}
-                    >
-                      <div className="row">
-                        <div className="col-9">
-                          <h1 className={cx("ielts-title", "title")}>{practice?.title}</h1>
-                          <small className={cx("ielts-desc", "desc")}>
-                            {practice?.description}
-                          </small>
-                        </div>
-                        <div className="col-3">
-                          <div className="d-flex justify-content-center align-items-center h-100 w-100">
-                            <button
-                              onClick={() => handleClick(practice)}
-                              className={cx("btn", "ielts-button", "button")}
-                            >
-                              Kiểm tra
-                            </button>
-                          </div>
+          
+            <h1
+              className={cx("advance-practice-section-sub-title", "pb-3", "ps-4")}
+            >
+              Bài kiểm tra từng block trong khóa học 
+            </h1>
+            {practices?.length > 0 ? (
+              <div className="d-flex flex-column">
+                {practices?.map(practice => (
+                  <div
+                    className={cx(
+                      "ielts-section",
+                      "pratice-section",
+                      "p-4",
+                      "border-top"
+                    )}
+                  >
+                    <div className="row">
+                      <div className="col-9">
+                        <h1 className={cx("ielts-title", "title")}>{practice?.title}</h1>
+                        <small className={cx("ielts-desc", "desc")}>
+                          {practice?.description}
+                        </small>
+                      </div>
+                      <div className="col-3">
+                        <div className="d-flex justify-content-center align-items-center h-100 w-100">
+                          <button
+                            onClick={() => handleClick(practice)}
+                            className={cx("btn", "ielts-button", "button")}
+                          >
+                            Kiểm tra
+                          </button>
                         </div>
                       </div>
                     </div>
-                    
-                  ))}
+                  </div>
+                  
+                ))}
 
-                  {/* <h1
+                {/* <h1
+                  className={cx(
+                    "advance-practice-section-sub-title",
+                    "py-3",
+                    "ps-4"
+                  )}
+                >
+                  Bài kiểm tra tổng cho cả course 
+                </h1> */}
+                {/* <div className={cx("border-top")}>
+                  <Link
+                    to={"/thptqgexams"}
                     className={cx(
-                      "advance-practice-section-sub-title",
-                      "py-3",
-                      "ps-4"
+                      "pratice-section",
+                      "p-4",
+                      "btn",
+                      "text-start",
+                      "THPTQG-tests-section"
                     )}
                   >
-                    Bài kiểm tra tổng cho cả course 
-                  </h1> */}
-                  {/* <div className={cx("border-top")}>
-                    <Link
-                      to={"/thptqgexams"}
-                      className={cx(
-                        "pratice-section",
-                        "p-4",
-                        "btn",
-                        "text-start",
-                        "THPTQG-tests-section"
-                      )}
-                    >
-                      <h1 className={cx("title")}>Tổng hợp các bài thi THPTQG</h1>
-                      <small className={cx("desc")}>
-                        Tổng hợp các bài thi THPTQG của các năm gần đây giúp ôn tập và
-                        rèn luyện tư duy để chuẩn bị cho các kỳ thi sau này
-                      </small>
-                    </Link>
-                  </div> */}
-                </div>
+                    <h1 className={cx("title")}>Tổng hợp các bài thi THPTQG</h1>
+                    <small className={cx("desc")}>
+                      Tổng hợp các bài thi THPTQG của các năm gần đây giúp ôn tập và
+                      rèn luyện tư duy để chuẩn bị cho các kỳ thi sau này
+                    </small>
+                  </Link>
+                </div> */}
+              </div>
 
-              ): (
-                <div>
-                  <img src={courseGilf}/>
-                  <h4 style={{color:"gray", fontWeight: "bold"}}>Hiện chưa có bài practice cho khóa học này. Bạn quay lại sau nhé</h4>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+            ): (
+              <div>
+                <img src={courseGilf}/>
+                <h4 style={{color:"gray", fontWeight: "bold"}}>Hiện chưa có bài practice cho khóa học này. Bạn quay lại sau nhé</h4>
+              </div>
+            )}
+          </div>
+         
+        )}
       </div>
     </>
   );
