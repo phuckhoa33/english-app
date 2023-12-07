@@ -44,15 +44,17 @@ function Learn() {
                 </div>
 
               ): (
-                <div style={{
-                  display: "flex", 
-                  justifyContent: "center", 
-                  alignItems: "center"
-                }}>
-                  <img src={loadingGif} alt="wait until the page loads" />
-    
-                  <h1 style={{textAlign: "center"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
-                </div>
+                <>
+                  <div style={{
+                    display: "flex", 
+                    justifyContent: "center", 
+                    alignItems: "center"
+                  }}>
+                    <img src={loadingGif} alt="wait until the page loads" />
+      
+                  </div>
+                  <h1 style={{textAlign: "center", color: "rgb(24,153,214)", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
+                </>
               )}
           </>
         ): (
