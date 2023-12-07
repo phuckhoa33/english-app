@@ -48,12 +48,13 @@ function Learn() {
                   <div style={{
                     display: "flex", 
                     justifyContent: "center", 
-                    alignItems: "center"
+                    alignItems: "center",
+                    width: "100%"
                   }}>
                     <img src={loadingGif} alt="wait until the page loads" />
       
                   </div>
-                  <h1 style={{textAlign: "center", color: "rgb(24,153,214)", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
+                  <h1 style={{textAlign: "center", color: "grey", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
                 </>
               )}
           </>
