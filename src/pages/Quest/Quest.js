@@ -141,7 +141,7 @@ function Quest() {
               ): (
                 <>
                   <img src={endingTask}/>
-                  <h1 style={{color: "black"}}>Nhiệm vụ của bạn hiện chưa cập nhật. Hãy quay lại sau nhé</h1>
+                  <h4 style={{color:"gray", fontWeight: "bold"}}>Nhiệm vụ của bạn hiện chưa cập nhật. Hãy quay lại sau nhé</h4>
                 </>
               )}
             </div>
