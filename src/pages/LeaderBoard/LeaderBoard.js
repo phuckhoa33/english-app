@@ -5,12 +5,24 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../context/UserContext";
-
+import {useLocation} from 'react-router-dom';
+import { useEffect } from "react";
 const cx = classNames.bind(Style);
 
 function LeaderBoard() {
   const {checkOpenRank} = useCourseContext();
   const {user, player, ranks, getRankOfCurrentPlayer} = useUserContext();
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // "document.documentElement.scrollTo" is the magic for React Router Dom v6
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Optional if you want to skip the scrolling animation
+    });
+  }, [pathname]);
 
   return (
     <div>

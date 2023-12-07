@@ -1,10 +1,11 @@
 import classNames from "classnames/bind";
 import Style from "./Shop.module.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BuyingPopup from "../../component/Popup/BuyingPopup";
 import CantBuyingPopup from "../../component/Popup/CantBuyingPopup";
 import { useUserContext } from "../../context/UserContext";
+import {useLocation} from 'react-router-dom';
 
 const cx = classNames.bind(Style);
 
@@ -12,6 +13,17 @@ function Shop() {
   const [showBuyingPopup, setShowBuyingPopup] = useState(false);
   const [buyItem, setBuyItem] = useState();
   const {player} = useUserContext();
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // "document.documentElement.scrollTo" is the magic for React Router Dom v6
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Optional if you want to skip the scrolling animation
+    });
+  }, [pathname]);
 
   const ClickToShowPopupHandle = (price) => {
     setBuyItem(price);

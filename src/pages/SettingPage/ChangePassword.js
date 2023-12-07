@@ -10,16 +10,20 @@ import Style from "./Setting.module.scss";
 import { SendEmailForResetPasswordPage } from "./SendEmailForResetPasswordPage";
 import { WaitingForEmailPage } from "./WaitingForEmailPage";
 import { ResetPasswordPage } from "./ResetPasswordPage";
-
 const cx = classNames.bind(Style);
 function ChangePassword() {
   const location = useLocation();
-  const {user, player} = useUserContext();
-  const {token} = useParams();
+  const {player} = useUserContext();
+
 
   useEffect(() => {
-    // alert(token)
-  }, [])
+    // "document.documentElement.scrollTo" is the magic for React Router Dom v6
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Optional if you want to skip the scrolling animation
+    });
+  }, [location.pathname]);
 
 
   const getCorrectPage = () => {

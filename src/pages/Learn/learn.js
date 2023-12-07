@@ -4,10 +4,10 @@ import { BlockLearnPage } from "../../component/Block/BlockLearnPage";
 import { useCourseContext } from "../../context/CourseContext";
 import { useUserContext } from "../../context/UserContext";
 import { useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
 import loadingGif from '../../assets/gif/HfpPD3Ne.gif';
 import { Spinner } from "../../component/Spinner/Spinner";
 import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
+import {useLocation} from 'react-router-dom';
 const cx = classNames.bind(Style);
 
 function Learn() {
@@ -16,6 +16,16 @@ function Learn() {
   const {player} = useUserContext();
   const loading = useLoadingAndTiming();
 
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // "document.documentElement.scrollTo" is the magic for React Router Dom v6
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Optional if you want to skip the scrolling animation
+    });
+  }, [pathname]);
 
   useEffect(() => {
     if(player === null) {

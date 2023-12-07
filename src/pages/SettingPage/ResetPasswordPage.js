@@ -10,7 +10,7 @@ import { useUserContext } from "../../context/UserContext";
 const cx = classNames.bind(Style);
 
 export const ResetPasswordPage = () => {
-    const {user, setUser, errorMessage, setErrorMesage, checkTokenWhenResetPassword} = useUserContext();
+    const {setUser, errorMessage, setErrorMesage, checkTokenWhenResetPassword} = useUserContext();
     const {token} = useParams(); 
     const [formValue,setFormValue] = useState({
         newPassword: "",
@@ -18,6 +18,11 @@ export const ResetPasswordPage = () => {
     });
     const navigate = useNavigate();
     
+    useEffect(() => {
+      if(!token) {
+        navigate("/");
+      }
+    }, [])
 
     const {newPassword, confirmNewPassword} = formValue;
 
