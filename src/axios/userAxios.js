@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const API = axios.create({baseURL: "http://localhost:8870/api"});
-const APICourse = axios.create({baseURL: "http://localhost:8871/api"});
+const API = axios.create({baseURL: "https://user-backend-meolearn.onrender.com/api"});
+const APICourse = axios.create({baseURL: "https://course-backend-meolearn.onrender.com/api"});
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem("token")){
