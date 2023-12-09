@@ -89,8 +89,8 @@ export const UserProvider = ({children}) => {
 
     const registerAdmin = async() => {
         const admin  = {
-            "username": "kenny",
-            "password": "123456"
+            "username": "phuckhoa",
+            "password": "332003"
         }
 
         const {data} = await login(admin);

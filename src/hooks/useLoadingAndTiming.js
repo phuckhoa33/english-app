@@ -7,7 +7,7 @@ export const useLoadingAndTiming = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 4000);
     
         // Clear the timeout to prevent potential memory leaks
         return () => clearTimeout(timeout);
