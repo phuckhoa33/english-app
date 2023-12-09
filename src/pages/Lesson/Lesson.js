@@ -16,7 +16,6 @@ import ResultModal from "../../component/ResultModal";
 import SkippedPopup from "../../component/Popup/SkiippedPopup";
 import DontClosePopup from "../../component/Popup/DontClosePopup";
 import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
-import { Spinner } from "../../component/Spinner/Spinner";
 
 const cx = classNames.bind(Style);
 
@@ -237,11 +236,8 @@ function Lesson() {
 
           {/* content */}
           <div className={cx("content-section")}>
-            {loading?<Spinner/>: (
-              <>
-                {getSuitableLayout()} 
-              </>
-            )}
+          
+            {getSuitableLayout()}
           </div>
           {/* content */}
 
