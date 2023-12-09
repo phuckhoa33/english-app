@@ -28,7 +28,7 @@
     }
     &:hover {
         background-color: #fff !important;
-        color: #262d3f !important; 
+        color: rgb(114, 193, 203) !important; 
     }
 }
 .practice-open-sub-menu{
@@ -38,7 +38,8 @@
         position: absolute;
         min-width: 250px;
         max-width: 350px;
-        background-color: #262d3f;
+        background-color: rgb(114, 193, 203);
+        color: #000;
         top: -10px;
         left: 190px;
         border: 1px solid #fff;
@@ -71,8 +72,8 @@
     }
     
     &:hover {
-        background-color: #fff;
-        color: #262d3f;
+        background-color: rgb(114, 193, 203);
+        color: #fff;
     }
     &:active {
         border-color: rgb(66,133,244);
@@ -86,10 +87,10 @@
         width: 250px;
         padding: 1rem 0;
         position: absolute;
-        top: -10px;
+        top: -100px;
         left: 190px;
         border: 1px solid #ccc;
-        background-color: #262d3f;
+        background-color: rgb(114, 193, 203);
         z-index: 4;
         .sub-menu-list{
             list-style-type: none;
@@ -99,9 +100,9 @@
                 
                 width: 100%;
                 &:hover {
-                    background-color: #cccccc2a;
+                    background-color: #fff;
                     .item-link {
-                        color: #fff !important; 
+                        color: rgb(114, 193, 203) !important; 
                     }
                 }
                 
@@ -110,6 +111,11 @@
             }
         }
     }
+}
+
+.chosen-sidebar {
+    background-color: rgb(114, 193, 203);
+    color: #fff; 
 }
 
 .show-sub-menu:hover .sub-menu{
@@ -121,5 +127,15 @@
     }
     .sub-menu,.pratice-sub-menu{
         left: 45px !important;
+        top: -50px !important;
+    }
+    .sidebar-title{
+        display: none !important;
+    }
+}
+@media screen and (max-width : 576px){
+    
+    .sub-menu{
+        top: -150px !important;
     }
 }

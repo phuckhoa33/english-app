@@ -18,12 +18,16 @@ import { useEffect, useState } from "react";
 import { useCourseContext } from "../../../../context/CourseContext.js";
 import { useTestContext } from "../../../../context/TestContext.js";
 
+
+
+
 const cx = classNames.bind(Style);
 function Sidebar() {
   const {logout} = useUserContext();
   const [checked, setChecked] = useState(true);
   const {course} = useCourseContext();
   const {resetAllCachingTestDetails} = useTestContext();
+  const [chosenItem, setChosenItem] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,13 +35,42 @@ function Sidebar() {
     if(localStorage.getItem("token")){
       setChecked(false);
     }
-  }, [])
+    if(location.pathname.includes("learn")){
+      setChosenItem("learn");
+    }
+    else if(location.pathname.includes("practice") || location.pathname.includes("randomTest")){
+      setChosenItem("practice");
+    }
+    else if(location.pathname.includes("test")){
+      setChosenItem("test");
+    }
+    else if(location.pathname.includes("leaderBoard")){
+      setChosenItem("leaderBoard");
+    
+    }
+    else if(location.pathname.includes("quest")){
+      setChosenItem("quest");
+    
+    }
+    else if(location.pathname.includes("shop")){
+      setChosenItem("shop");
+    
+    }
+    else if(location.pathname.includes("profile")){
+      setChosenItem("profile");
+    
+    }
+  }, []);
 
   const handleClick = () => {
     resetAllCachingTestDetails();
     if(location.pathname.includes("readQuestionPage")){
       navigate("/");
     }
+  }
+
+  const handleClickItem = (itemName) => {
+    setChosenItem(itemName);
   }
 
   return (
@@ -74,12 +107,19 @@ function Sidebar() {
                 "nav-item",
                 "rounded-4",
                 "text-center",
-                "text-md-start"
+                "text-md-start",
+                `${chosenItem==="learn"&&"chosen-sidebar"}`
               )}
               to="/learn"
+              
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faHome} />
-              <span className="d-none d-md-inline-block m-0 ms-md-4  ">
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
                 Học
               </span>
             </Link>
@@ -91,22 +131,33 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "position-relative",
-                "practice-open-sub-menu"
+                "practice-open-sub-menu",
+                `${chosenItem==="practice"&&"chosen-sidebar"}`
               )}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faDumbbell} />
-              <span className="d-none d-md-inline-block m-0 ms-md-4  ">
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
                 Luyện tập
               </span>
 
               <div className={cx("pratice-sub-menu", "py-5", "rounded-5")}>
                 <div className={cx("d-flex", "flex-column")}>
-                  <Link to={`/readQuestionPage/randomTest/${course?.id}`} className={cx("btn", "item-link", "py-3", "rounded-3")}>
+                  <Link 
+                    to={`/readQuestionPage/randomTest/${course?.id}`} 
+                    className={cx("btn", "item-link", "py-3", "rounded-3")}
+                    onClick={() => handleClickItem("practice")}
+                  >
                     Luyện tập Cơ bản
                   </Link>
                   <Link
                     to={`/practices/${course?.id}`}
                     className={cx("btn", "item-link", "py-3", "rounded-3")}
+                    onClick={() => handleClickItem("practice")}
                   >
                     Luyện tập Nâng cao
                   </Link>
@@ -119,8 +170,10 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "nav-item",
-                "rounded-4"
+                "rounded-4",
+                `${chosenItem==="test"&&"chosen-sidebar"}`
               )}
+              onClick={() => handleClickItem("test")}
               to="/tests"
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faNoteSticky} />
@@ -134,12 +187,19 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "nav-item",
-                "rounded-4"
+                "rounded-4",
+                `${chosenItem==="leaderBoard"&&"chosen-sidebar"}`
               )}
               to="/leaderBoard"
+              onClick={() => handleClickItem("leaderBoard")}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faShield} />
-              <span className="d-none d-md-inline-block ms-md-4">
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
                 Bảng Xếp Hạng
               </span>
             </Link>
@@ -150,12 +210,21 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "nav-item",
-                "rounded-4"
+                "rounded-4",
+                `${chosenItem==="quest"&&"chosen-sidebar"}`
               )}
               to="/quest"
+              onClick={() => handleClickItem("quest")}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faScroll} />
-              <span className="d-none d-md-inline-block ms-md-4">Nhiệm vụ</span>
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
+                Nhiệm vụ
+              </span>
             </Link>
 
             <Link
@@ -164,12 +233,21 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "nav-item",
-                "rounded-4"
+                "rounded-4",
+                `${chosenItem==="shop"&&"chosen-sidebar"}`
               )}
               to="/shop"
+              onClick={() => handleClickItem("shop")}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faShop} />
-              <span className="d-none d-md-inline-block ms-md-4">Cửa Hàng</span>
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
+                Cửa Hàng
+              </span>  
             </Link>
             {!checked && (
 
@@ -179,12 +257,21 @@ function Sidebar() {
                 "text-center",
                 "text-md-start",
                 "nav-item",
-                "rounded-4"
+                "rounded-4",
+                `${chosenItem==="profile"&&"chosen-sidebar"}`
               )}
               to="/profile"
+              onClick={() => handleClickItem("profile")}
               >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faUser} />
-              <span className="d-none d-md-inline-block ms-md-4">Hồ Sơ</span>
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
+                Hồ Sơ
+              </span>
               </Link>
             )}
 
@@ -196,11 +283,18 @@ function Sidebar() {
                 "nav-item",
                 "rounded-4",
                 "position-relative",
-                "show-sub-menu"
+                "show-sub-menu",
               )}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faEllipsis} />
-              <span className="d-none d-md-inline-block ms-md-4">Xem Thêm</span>
+              <span
+                className={cx(
+                  "d-none d-md-inline-block m-0 ms-md-4",
+                  "sidebar-title"
+                )}
+              >
+                Xem Thêm
+              </span>
               <div className={cx("sub-menu", "rounded-5")}>
                 <ul className={cx("sub-menu-list")}>
                   {checked && (

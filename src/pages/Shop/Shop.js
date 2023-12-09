@@ -87,26 +87,26 @@ function Shop() {
                       className="w-100 h-100"
                     />
                   </div>
-                  <div className="col-7">
-                    <div className={cx("heart-item-title", "py-3")}>
-                      Hồi phục Trái tim
+                      <div className="col-7">
+                      <div className={cx("heart-item-title", "py-3")}>
+                        Hồi phục Trái tim
+                      </div>
+                      <p>
+                        Lấp đầy trái tim để không phải lo lắng mắc lỗi sai trong
+                        bài học
+                      </p>
                     </div>
-                    <p>
-                      Lấp đầy trái tim để không phải lo lắng mắc lỗi sai trong
-                      bài học
-                    </p>
-                  </div>
-                  <div className="col-3 d-flex align-items-center">
-                    <button
-                      className={cx(
-                        "shop-purcherse-btn",
-                        "py-3",
-                        "w-100",
-                        "rounded-4"
-                      )}
-                      onClick={() => ClickToShowPopupHandle(100)}
-                    >
-                      <img
+                    <div className="col-3 d-flex align-items-center">
+                      <button
+                        className={cx(
+                          "shop-purcherse-btn",
+                          "py-3",
+                          "w-100",
+                          "rounded-4"
+                        )}
+                        onClick={() => ClickToShowPopupHandle(100)}
+                      >
+                        <img
                         src="https://d35aaqx5ub95lt.cloudfront.net/images/gems/45c14e05be9c1af1d7d0b54c6eed7eee.svg"
                         alt=""
                         className="pe-3"

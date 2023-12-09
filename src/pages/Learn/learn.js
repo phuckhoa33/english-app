@@ -5,8 +5,6 @@ import { useCourseContext } from "../../context/CourseContext";
 import { useUserContext } from "../../context/UserContext";
 import { useEffect, useState } from "react";
 import loadingGif from '../../assets/gif/HfpPD3Ne.gif';
-import { Spinner } from "../../component/Spinner/Spinner";
-import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
 import {useLocation} from 'react-router-dom';
 const cx = classNames.bind(Style);
 
@@ -14,8 +12,6 @@ function Learn() {
   const [level, setLevel] = useState();
   const {blocks} = useCourseContext();
   const {player} = useUserContext();
-  const loading = useLoadingAndTiming();
-
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -43,37 +39,31 @@ function Learn() {
     <div>
       <div className={cx("container", "my-4")}>
         {/* course section  */}
-        {!loading ? (
-          <>
-              {blocks?.length > 0 ? (
-                <div className="row">
-                  {blocks?.map((block, index) => (
-                    <BlockLearnPage block={block} index={index+1} level={level}/>
+        <>
+            {blocks?.length > 0 ? (
+              <div className="row">
+                {blocks?.map((block, index) => (
+                  <BlockLearnPage block={block} index={index+1} level={level}/>
 
-                  ))}
+                ))}
+              </div>
+
+            ): (
+              <>
+                <div style={{
+                  display: "flex", 
+                  justifyContent: "center", 
+                  alignItems: "center",
+                  width: "100%"
+                }}>
+                  <img style={{width: "70%"}} src={loadingGif} alt="wait until the page loads" />
+    
                 </div>
-
-              ): (
-                <>
-                  <div style={{
-                    display: "flex", 
-                    justifyContent: "center", 
-                    alignItems: "center",
-                    width: "100%"
-                  }}>
-                    <img style={{width: "70%"}} src={loadingGif} alt="wait until the page loads" />
-      
-                  </div>
-                  <h1 style={{textAlign: "center", color: "grey", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
-                </>
-              )}
-          </>
-        ): (
-          <>
-            
-            <Spinner/>
-          </>
-        )}
+                <h1 style={{textAlign: "center", color: "grey", fontWeight: "bold"}}>Xin lỗi vì sự bất tiện này. Hiện chưa có bài học ở trình độ của bạn</h1>
+              </>
+            )}
+        </>
+        
         {/* each course section */}
 
         {/* course section  */}

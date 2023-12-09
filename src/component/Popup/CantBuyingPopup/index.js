@@ -43,33 +43,34 @@ function CantBuyingPopup(props) {
               Cần 100 Kim Cương để đổi
             </div>
             <div className="row pt-5">
-              <div className="col justify-content-center align-items-center d-flex">
+              <div className="col-12 col-lg-5 justify-content-center align-items-center d-flex">
                 <button
                   className={cx(
                     "buying-popup-btn",
+                    "mb-3",
                     "px-3",
                     "py-2",
                     "rounded-4",
                     "premium-btn"
                   )}
-
                   onClick={() => navigate("/premium")}
                 >
                   Mua gói Super
                 </button>
               </div>
-              <div className="col justify-content-center align-items-center d-flex">
+              <div className="col-12 col-lg-7 justify-content-center align-items-center d-flex">
                 <button
                   className={cx(
                     "buying-popup-btn",
+                    "mb-3",
                     "px-3",
                     "py-2",
                     "rounded-4",
                     "buy-in-btn"
-                    )}
-                      onClick={() => navigate("/")}
-                    >
-                  Học để kiếm thêm Kim Cương
+                  )}
+                  onClick={() => navigate("/learn")}
+                >
+                  Kiếm thêm Kim Cương
                 </button>
               </div>
             </div>

@@ -7,12 +7,13 @@ export const CourseProvider = ({children}) => {
     const [course, setCourse] = useState();
     const [blocks, setBlocks] = useState();
     const [lessons, setLessons] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
     const getLessonsAndBlocksAndLessons = async(level) => {
         const title = `Course level ${level}`;
         const {data} = await getCourse(title);
-
+        setLoading(false);
          
         setCourse(data.data.courseDetail);
         // get Blocks
@@ -53,6 +54,7 @@ export const CourseProvider = ({children}) => {
         <CourseContext.Provider value={{
             blocks,
             course,
+            loading,
             getLessonsAndBlocksAndLessons,
             getLessonsByBlockId,
             checkOpenRank

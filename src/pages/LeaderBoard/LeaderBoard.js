@@ -96,7 +96,7 @@ function LeaderBoard() {
             <div className={cx("leaderboard", "d-flex", "flex-column", "py-2")}>
               <div className={cx("leaderboard-list", "px-3")}>
                 {ranks?.length > 0 ? (
-                  <>
+                  <div className={cx("leaderboard-list", "px-0", "px-sm-3")}>
                     {ranks?.map((rank, index) => (
                       <div
                         className={cx(
@@ -117,6 +117,8 @@ function LeaderBoard() {
                                 className={cx(
                                   "col-2",
                                   "d-flex",
+                                  "d-none",
+                                  "d-sm-flex",
                                   "justify-content-center"
                                 )}
                               >
@@ -144,7 +146,7 @@ function LeaderBoard() {
                               </div>
                             </div>
                           </div>
-                          <div className={cx("col-2")}>
+                          <div className={cx("col-1")}>
                             <div className={cx("user-exp-leaderboard-container")}>
                               {rank?.score} 
                             </div>
@@ -153,7 +155,7 @@ function LeaderBoard() {
                       </div>
 
                     ))}
-                  </>
+                  </div>
                 ): (
                   <div style={{textAlign: "center"}}>
 
@@ -185,6 +187,8 @@ function LeaderBoard() {
                         className={cx(
                           "col-2",
                           "d-flex",
+                          "d-none",
+                          "d-sm-flex",
                           "justify-content-center"
                         )}
                       >
@@ -208,7 +212,7 @@ function LeaderBoard() {
                       </div>
                     </div>
                   </div>
-                  <div className={cx("col-2")}>
+                  <div className={cx("col-1")}>
                     <div className={cx("user-exp-leaderboard-container")}>
                       {player?.score} Scores
                     </div>

@@ -1,6 +1,7 @@
 .premium-container{
     min-height: 100vh;
-    min-width: 100vh;
+    height: 100%;
+    width: 100%;
     background: radial-gradient(216% 106% at 6% 3%,rgba(38,246,99,.3) 0,rgba(38,138,255,.3) 52%,rgba(252,85,255,.3) 100%),rgb(0,4,55);
 
     .premium-header{
@@ -11,7 +12,21 @@
             border: none;
         }
     }
-
+    .disabled{
+        box-shadow: none !important;
+        background-color: #cccccc3a !important;
+        color: #ccc !important;
+        border: none !important;
+        &:active{
+            transform: none !important;
+        }
+    }
+    
+    .active{
+        background-color:rgb(88,204,2);
+        box-shadow: 0px 2px 0px 1px rgb(58, 132, 2);
+        color: #fff;
+    }
 
 
     .premium-intro-container{
@@ -30,11 +45,11 @@
             border-radius: 1.5rem;
             .hightlight-background{
                 position: absolute;
-                top: 10%;
-                bottom: 10%;
+                top: 0;
+                bottom: 0;
                 background-color: #cccccc6d;
-                width: 20%;
-                right: 5%;
+                width: 100px;
+                right: 20px;
                 border-radius: 1.5rem;
               }
             .premium-content{
@@ -71,6 +86,7 @@
     .premium-submit-container{
         .premium-submit-btn{
             border-radius: 2rem;
+            background-color: #ccc;
             padding: 13px 45px;
             font-size: 15px;
             font-weight: 700;
@@ -83,5 +99,10 @@
                 box-shadow: none;
             }
         }
+    }
+}
+@media screen and (max-width : 768px){
+    .hightlight-background{
+        right: 10px !important;
     }
 }

@@ -72,13 +72,13 @@ export const ResetPasswordPage = () => {
             <h1 className={cx("setting-title", "my-3")}>Mật khẩu</h1>
             <div className="my-5">
               <div className="row">
-                <div className="col-3">
-                  <label htmlFor="" className={cx("setting-item-label")}>
+                <div className="col-12 col-lg-5 text-start text-lg-end">
+                  <label htmlFor="" className={cx("setting-item-label", "me-5")}>
                     Mật khẩu mới
                   </label>
                 </div>
 
-                <div className="col-9 ps-5">
+                <div className="col-12 col-lg-7 ps-5">
                   <input
                     type="password"
                     className={cx(
@@ -97,12 +97,12 @@ export const ResetPasswordPage = () => {
             </div>
             <div className="mb-5">
               <div className="row">
-                <div className="col-3">
-                  <label htmlFor="" className={cx("setting-item-label")}>
+              <div className="col-12 col-lg-5 text-start text-lg-end">
+                <label htmlFor="" className={cx("setting-item-label", "me-5")}>
                   Nhập lại mật khẩu mới
                   </label>
                 </div>
-                <div className="col-9 ps-5">
+                <div className="col-12 col-lg-7 ps-5">
                   <input
                     type="password"
                     className={cx(

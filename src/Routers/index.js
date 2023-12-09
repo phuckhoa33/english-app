@@ -38,11 +38,16 @@ const publicRoutes = [
   { path: "/tests", component: Tests },
   { path: "/readQuestionPage/:testType/:testId", component: ReadQuestionPage },
   { path: "/payment", component: Payment, layout: PremiumLayout },
-  { path: "/payment/success", component: PaymentSuccess, layout: null },
+  {
+    path: "/payment/success",
+    component: PaymentSuccess,
+    layout: PremiumLayout,
+  },
+  { path: "/payment/error", component: ErrorPayment, layout: PremiumLayout },
   { path: "/payment/error", component: ErrorPayment, layout: null },
   { path: "/allTestOfType/:allTestType", component: THPTQGExams },
   { path: "/learn", component: learn },
-  { path: "/", component: learn },
+  { path: "/", component: LoadingPage, layout: null },
   { path: "/leaderBoard", component: LeaderBoard },
   { path: "/license", component: License, layout: OnlySidebarLayout },
   { path: "/premium", component: PremiumIntro, layout: PremiumLayout },
@@ -54,6 +59,7 @@ const publicRoutes = [
   { path: "/signin/:token/changePassword", component: ChangePassword, layout: null },
   { path: "/sendEmail", component: ChangePassword, layout: null },
   { path: "/waitingPage", component: ChangePassword, layout: null },
+  
   {
     path: "signin/emailRequestPending",
     component: EmailRequestPending,

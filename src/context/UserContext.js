@@ -17,7 +17,6 @@ export const UserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [ranks, setRanks] = useState([]);
 
-
     useEffect(() => {
         registerUser();
         registerAdmin();
@@ -26,7 +25,7 @@ export const UserProvider = ({children}) => {
     
 
     useEffect(() => {
-        if(player !== null){
+        if(player){
             getLessonsAndBlocksAndLessons(player.currentLevel);
             localStorage.removeItem("account");
         }
@@ -42,6 +41,7 @@ export const UserProvider = ({children}) => {
                     currentLesson: null,
                     currentBlock: null,
                     currentCourse: null,
+                    exPoint: 0,
                     hearts: 5,
                     score: 0,
                     streak: 0
@@ -53,7 +53,7 @@ export const UserProvider = ({children}) => {
                 getLessonsAndBlocksAndLessons(1);
             }
         }
-    }, [player])
+    }, [])
 
     const registerUser = async() => {
         try {

@@ -22,7 +22,7 @@ const cx = classNames.bind(Style);
 function ReadQuestionPage() {
   const {testDetail, getTestByType, questions} = useTestContext();
   const {testId, testType} = useParams();
-  const loading = useLoadingAndTiming();
+  const loading = useLoadingAndTiming(3000);
 
   useEffect(() => {
     getTestByType(testType,testId);
@@ -36,6 +36,7 @@ function ReadQuestionPage() {
   return (
     <>
       {loading?<Spinner/>:(
+
         <div className="d-flex justify-content-center align-items-center">
           <div className={cx("read-question-page-container", "py-4")}>
             <div className="row">
@@ -89,7 +90,6 @@ function ReadQuestionPage() {
             </div>
           </div>
         </div>
-
       )}
     </>
   );

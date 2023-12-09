@@ -9,14 +9,14 @@ import {Spinner} from '../../component/Spinner/Spinner';
 const cx = classNames.bind(Style);
 
 function ResultModal(props) {
-  const {chosenAnswers, questions, answers} = useTestContext();
+  const {chosenAnswers, questions, answers, scoreTotalOfTest} = useTestContext();
   const [questionsResult, setQuestionsResult] = useState([]);
   const [content, setContent] = useState(true);
   const [answer, setAnswer] = useState();
 
   useEffect(() => {
     handleCheckCorrectOrWrong();
-  }, [])
+  }, [scoreTotalOfTest])
 
   const handleCheckCorrectOrWrong = () => {
     const copiedQuestions = [];
