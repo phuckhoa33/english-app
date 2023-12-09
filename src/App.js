@@ -8,6 +8,7 @@ import { CourseProvider } from "./context/CourseContext";
 import { TaskProvider } from "./context/TaskContext";
 import { PaymentProvider } from "./context/PaymentContext";
 import { PracticeProvider } from "./context/PracticeContext";
+import Page404 from "./pages/Page404";
 
 function App() {
   
@@ -41,6 +42,7 @@ function App() {
                                 />
                               );
                             })}
+                            <Route path="*" element={<Page404/>}/>
                           </Routes>
                       </TestProvider>
                   </UserProvider>

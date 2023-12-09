@@ -44,7 +44,6 @@ const publicRoutes = [
     layout: PremiumLayout,
   },
   { path: "/payment/error", component: ErrorPayment, layout: PremiumLayout },
-  { path: "/payment/error", component: ErrorPayment, layout: null },
   { path: "/allTestOfType/:allTestType", component: THPTQGExams },
   { path: "/learn", component: learn },
   { path: "/", component: LoadingPage, layout: null },
