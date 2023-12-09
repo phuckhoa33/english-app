@@ -10,7 +10,7 @@ export const LoadingPage = () => {
     const {getTestByType} = useTestContext();
     useEffect(() => {
         const fetchData = async() => {
-            await getTestByType("lesson",lessonNumber); 
+            await getTestByType(type,lessonNumber); 
         }
         fetchData();
     }, [])

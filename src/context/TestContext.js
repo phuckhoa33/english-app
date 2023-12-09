@@ -82,10 +82,9 @@ export const TestProvider = ({children}) => {
                         questionsStorage === null &&
                         answerQuestionStorage === null;
         if(checked) {
-            
-            
             if(testType==="randomTest" || testType==="entryTest"){
                 const {data} = await getRandomTest(testId);
+                console.log(data);
                 testDetailStorage = initialTest;
                 questionsStorage = data?.data?.questions;
             }

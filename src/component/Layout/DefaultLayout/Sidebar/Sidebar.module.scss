@@ -10,7 +10,7 @@
     left: 0;
     padding-left: 0;    
     width: 250px;
-    background-color: #262d3f;
+    background-color: #fff;
     z-index: 1;
 }
 .item-link{
@@ -27,8 +27,8 @@
         border-color: rgb(66,133,244);
     }
     &:hover {
-        background-color: #cccccc2a !important;
-        color: #fff !important; 
+        background-color: #fff !important;
+        color: #262d3f !important; 
     }
 }
 .practice-open-sub-menu{
@@ -71,8 +71,8 @@
     }
     
     &:hover {
-        background-color: #cccccc2a;
-        color: #fff;
+        background-color: #fff;
+        color: #262d3f;
     }
     &:active {
         border-color: rgb(66,133,244);
