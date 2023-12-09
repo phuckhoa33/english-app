@@ -15,6 +15,8 @@ import LessonHeader from "../../component/LessonHeader";
 import ResultModal from "../../component/ResultModal";
 import SkippedPopup from "../../component/Popup/SkiippedPopup";
 import DontClosePopup from "../../component/Popup/DontClosePopup";
+import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
+import { Spinner } from "../../component/Spinner/Spinner";
 
 const cx = classNames.bind(Style);
 
@@ -54,6 +56,7 @@ function Lesson() {
   const [answerActive, setAnswerActive] = useState([]);
   const [chosenAnswer, setChosenAnswer] = useState([]);
   const {lessonNumber} = useParams();
+  const loading = useLoadingAndTiming();
   const hasMounted = useRef(true);
 
   useEffect(() => {
@@ -234,7 +237,11 @@ function Lesson() {
 
           {/* content */}
           <div className={cx("content-section")}>
-            {getSuitableLayout()}
+            {loading?<Spinner/>: (
+              <>
+                {getSuitableLayout()} 
+              </>
+            )}
           </div>
           {/* content */}
 
