@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import Style from "./Profile.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import {useLocation} from 'react-router-dom';
+import { useEffect } from "react";
 
 const cx = classNames.bind(Style);
 
