@@ -6,7 +6,7 @@ import { register } from "../../axios/userAxios";
 import { ErrorNotification } from "./ErrorNotification";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
-
+import Spinner from 'react-bootstrap/Spinner';
 const cx = classNames.bind(LoginLayoutScss);
 
 function Register() {
@@ -17,6 +17,7 @@ function Register() {
     email: ""
   })
   const [errorNotification, setErrorNotification] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // variables 
   const { username, password, email } = formValue;
@@ -40,6 +41,7 @@ function Register() {
       return;
     }
     formValue.social = "none";  
+    setLoading(true);
     const {data} = await register(formValue);
     console.log(data);
     if(data?.data?.token){
@@ -50,6 +52,7 @@ function Register() {
     else {
       setErrorNotification(data.data.message);
     }
+    setLoading(false);
   }
 
   return (
@@ -121,7 +124,8 @@ function Register() {
           className={cx("sign-in-submit-btn", "w-100", "py-3", "rounded-4")}
           onClick={handleSubmit}
         >
-          Tạo Tài Khoản
+          {loading?<Spinner/>:"Tạo Tài Khoản"}
+          
         </button>
         
         <SocialLogin/>

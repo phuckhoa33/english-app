@@ -6,7 +6,7 @@ import { login } from "../../axios/userAxios";
 import { SocialLogin } from "./SocialLogin";
 import { ErrorNotification } from "./ErrorNotification";
 import { useUserContext } from "../../context/UserContext";
-
+import Spinner from 'react-bootstrap/Spinner';
 const cx = classNames.bind(LoginLayoutScss);
 
 function SignIn() {
@@ -17,7 +17,9 @@ function SignIn() {
     password: "",
   });
   const [errorNotification, setErrorNotification] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -38,9 +40,9 @@ function SignIn() {
 
   const handleCheckUserLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const {data} = await login(formValue);
-
+    
     if (data?.data?.token) {
       localStorage.setItem("token", JSON.stringify(data?.data?.token));
       await registerUser();
@@ -48,6 +50,7 @@ function SignIn() {
     } else {
       setErrorNotification(data.data.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -96,15 +99,15 @@ function SignIn() {
           {/* Below stack is error message when don't sign in successfully */}
           <ErrorNotification errorNotification={errorNotification} />
         </div>
-
+        
 
         <button
           onClick={handleCheckUserLogin}
           className={cx("sign-in-submit-btn", "w-100", "py-3", "rounded-4")}
         >
-          Đăng Nhập
+          {loading?<Spinner/>:"Đăng Nhập"}
         </button>
-        <SocialLogin />
+        <SocialLogin/>
       </form>
     </div>
   );

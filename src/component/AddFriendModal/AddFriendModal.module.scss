@@ -15,11 +15,13 @@
         bottom: 0;
         left: 0;
         right: 0;
+    }
         .add-friend-container{
             background-color: #eee;
             min-height: 60%;
             min-width: 50%;
             border-radius: 1rem;
+            min-height: 70vh;
             
             .close-btn{
                 position: absolute;
@@ -62,8 +64,6 @@
                 overflow-y: auto;
                 overflow-x: hidden;
                 scrollbar-gutter: stable;
-
-                
                 &::-webkit-scrollbar{
                     width: 1px ;
                    }
@@ -86,8 +86,7 @@
                         padding: 16px;
                         .friend-display{
                             &:hover{
-                                background-color: #cccccc3a !important;
-                                cursor: pointer;
+                                background-color: #cccccc3a;
                                 .friend-name {
                                     color: #000 !important;
                                 }
@@ -144,6 +143,6 @@
                     transform: translate(0,2px);
                 }
             }
-        }
+        
     }
 }

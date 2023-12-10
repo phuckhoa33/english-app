@@ -51,12 +51,12 @@ function LeaderBoard() {
 
           <div className={cx("d-flex", "justify-content-center", "mb-5")}>
             <Link
-              to={"/"}
+              to={"/"}  
               className={cx("d-none", "leaderboard-start-btn", "my-3")}
             >
               Bắt Đầu Học
             </Link>
-            {!user?.avatar && (
+            {!user?.email && (
               <Link
                 to={"/signin"}
                 className={cx("leaderboard-start-btn", "my-3")}
@@ -165,7 +165,7 @@ function LeaderBoard() {
               </div>
             </div>
           </div>
-          {user?.avatar && (
+          {user?.email && (
             <div className={cx("this-user")}>
               <div className={cx("leaderboard-item", "py-4", "rounded-4")}>
                 <div className="row align-items-center w-100 px-5">

@@ -31,6 +31,15 @@ function Tabs() {
     
     await payBillApi();
   }
+
+  const createOrder = async(data, actions) => {
+    await payBillApi();
+  }
+
+  const onApprove = (data, actions) => {
+    
+  }
+
   return (
     <>
       <div className={cx("tabs-container")}>
@@ -314,7 +323,10 @@ function Tabs() {
             {paymentToggle===1 ? (
               <>
                 <PayPalScriptProvider options={initialOptions}>
-                  <PayPalButtons onClick={handleSubmit}/>
+                  <PayPalButtons 
+                    createOrder={(data, actions) => createOrder(data, actions)}
+                    onApprove={(data, actions) => onApprove(data, actions)}
+                  />
 
                 </PayPalScriptProvider>
               </>

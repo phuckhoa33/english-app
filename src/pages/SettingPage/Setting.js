@@ -85,29 +85,36 @@ function Setting() {
                     </label>
                   </div>
                   <div className=" col-12 col-sm-9 ps-5">
-                    <label
-                      htmlFor="upload-file-btn"
-                      className={cx("upload-file-btn", "ms-5")}
-                    >
-                      CHỌN TẬP TIN
-                    </label>
-                    <input
-                      type="file"
-                      id="upload-file-btn"
-                      className={cx("uploadImg")}
-                      onChange={changeAvatarHandel}
-                      hidden
-                    />
-                    <p>
-                      {avatar && (
-                        <small className={cx("upload-img-status", "ms-5")}>
-                          {avatar.name}
-                        </small>
-                      )}
-                    </p>
-                    <p className={cx("file-space-rqment", "ms-5")}>
-                      kích cỡ ảnh tối đa là 1 MB
-                    </p>
+                    {user?.isAvatar ? (
+                      <>
+                        <label
+                          htmlFor="upload-file-btn"
+                          className={cx("upload-file-btn", "ms-5")}
+                        >
+                          CHỌN TẬP TIN
+                        </label>
+                        <input
+                          type="file"
+                          id="upload-file-btn"
+                          className={cx("uploadImg")}
+                          onChange={changeAvatarHandel}
+                          hidden
+                        />
+                        <p>
+                          {avatar && (
+                            <small className={cx("upload-img-status", "ms-5")}>
+                              {avatar.name}
+                            </small>
+                          )}
+                        </p>
+                        <p className={cx("file-space-rqment", "ms-5")}>
+                          kích cỡ ảnh tối đa là 1 MB
+                        </p>
+                      </>
+
+                    ): (
+                      <h3 className={cx("upload-file-btn", "ms-5")}>Hiện không thể đổi avatar</h3>
+                    )}
                   </div>
                 </div>
               </div>
@@ -167,7 +174,7 @@ function Setting() {
               </div>
               <div className="mb-5">
                 <div className="row">
-                  <div className="col-3">
+                <div className="col-12 col-sm-3 ms-5 ms-sm-0 d-flex d-sm-block justify-content-start align-items-center ps-5 ps-sm-0 text-start">
                     <label
                       htmlFor=""
                       className={cx("setting-item-label", "me-5")}

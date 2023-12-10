@@ -3,10 +3,17 @@ import Style from "../PremiumLayout/Premium.module.scss";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { usePaymentContext } from "../../../context/PaymentContext";
 
 const cx = classNames.bind(Style);
 
 function PremiumIntro() {
+  const {setPaymentDetail, paymentDetail} = usePaymentContext();
+
+  const handleClickPerchase = () => {
+    setPaymentDetail({...paymentDetail, total: 3});
+  }
+
   return (
     <>
       <div
@@ -86,7 +93,7 @@ function PremiumIntro() {
               "align-items-center"
             )}
           >
-            <Link to={"/payment"} className={cx("premium-submit-btn", "btn")}>
+            <Link onClick={handleClickPerchase} to={"/payment"} className={cx("premium-submit-btn", "btn")}>
               Trả Phí để sử dụng 14 ngày miễn phí
             </Link>
           </div>

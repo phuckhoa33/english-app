@@ -6,7 +6,6 @@ const cx = classNames.bind(Style);
 
 function Profile() {
   const {user} = useUserContext();
-
   return (
     <div
       className={cx(
@@ -20,12 +19,12 @@ function Profile() {
     >
       <div className={cx("profile-container", "my-3")}>
         <div className={cx("user-infor-section", "my-3", "pb-4")}>
-          <div className="row">
-            <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between ">
+            <div>
               <h1 className={cx("user-name")}>{user?.username}</h1>
               <small className={cx("user-nickname")}>{user?.email}</small>
               <p className={cx("date-to-join", "my-3")}>
-                Đã tham gia vào {user?.createdAt}
+                Đã tham gia {user?.createdAt}
               </p>
               <p className={cx("folower", "my-3")}>
                 Đang theo dõi 0 / 0 Người theo dõi
@@ -34,16 +33,16 @@ function Profile() {
             <div>
               <div className={cx("avatar-img-container")}>
                 <img
-                src={user?.avatar ? user?.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0P6wm44mHnNrjQMQ7EdGgsz5iT4rsqnY_4Q&usqp=CAU"}
-                alt=""
-                className={cx(
-                  "user-avatar",
-                  "rounded-circle",
-                  "w-100",
-                  "h-100",
-                  "p-3"
-                )}
-              />
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0P6wm44mHnNrjQMQ7EdGgsz5iT4rsqnY_4Q&usqp=CAU"
+                  alt=""
+                  className={cx(
+                    "user-avatar",
+                    "rounded-circle",
+                    "w-100",
+                    "h-100",
+                    "p-3"
+                  )}
+                />
               </div>
             </div>
           </div>
@@ -62,7 +61,6 @@ function Profile() {
                 )}
               >
                 <div className={cx("process-display", "row")}>
-                  <div className="row">
                   <div className="col-2 d-flex justify-content-center m-0">
                     <img
                       src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg"
@@ -80,7 +78,6 @@ function Profile() {
                       0
                     </h1>
                     <h1 className={cx("process-name-display")}>Ngày Streak</h1>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -96,7 +93,6 @@ function Profile() {
                 )}
               >
                 <div className={cx("process-display", "row")}>
-                  <div className="row">
                   <div className="col-2 d-flex justify-content-center">
                     <img
                       src="https://d35aaqx5ub95lt.cloudfront.net/images/profile/01ce3a817dd01842581c3d18debcbc46.svg"
@@ -107,7 +103,6 @@ function Profile() {
                   <div className="col-10">
                     <h1 className={cx("process-count-display")}>178</h1>
                     <h1 className={cx("process-name-display")}>Tổng điểm KN</h1>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -157,7 +152,6 @@ function Profile() {
                 )}
               >
                 <div className={cx("process-display", "row")}>
-                  <div className="row ">
                   <div className="col-2 d-flex justify-content-center">
                     <img
                       src="https://d35aaqx5ub95lt.cloudfront.net/images/profile/105f8a43d07cdbbe393f9588eba784f8.svg"
@@ -177,7 +171,6 @@ function Profile() {
                     <h1 className={cx("process-name-display")}>
                       Số lần đạt top 3
                     </h1>
-                    </div>
                   </div>
                 </div>
               </div>

@@ -40,16 +40,20 @@ function AddFriendModal(props) {
 
   return (
     <>
-      <div className={cx("add-friend-modal-wrapper")}>
+      <div className={cx(
+          "add-friend-modal-wrapper",
+          "d-flex",
+          "justify-content-center",
+          "align-items-center"
+        )}>
         <div
-          className={cx(
-            "add-friend-overlay",
-            "d-flex",
-            "justify-content-center",
-            "align-items-center"
-          )}
+          className={cx("add-friend-overlay")}
+          onClick={() => {
+            props.clickToOpenHandle();
+          }}
         >
-          <div className={cx("add-friend-container", "position-relative")}>
+        </div>
+          <div className={cx("add-friend-container", "position-relative", "py-5")}>
             <button
               className={cx("close-btn")}
               onClick={() => {
@@ -107,11 +111,7 @@ function AddFriendModal(props) {
                     <>
                       {users?.map((user) => (
                         <li
-                          className={cx(
-                            "friend-display",
-                            "mb-3",
-                            "py-2",
-                          )}
+                          className={cx("friend-display", "mb-3", "py-3", "rounded-3")}
                           style={{
                             backgroundColor: `${user?.id===addedFriendId?"#cccccc3a":"#fff"}`,
                             
@@ -119,7 +119,7 @@ function AddFriendModal(props) {
                           onClick={() => handleBlockUser(user?.id)}
                         >
                           <div className="row">
-                            <div className="col-2">
+                            <div className="col-2 d-flex justify-content-center">
                               <div className={cx("friend-avatar-container")}>
                                 <img
                                   src={
@@ -158,7 +158,6 @@ function AddFriendModal(props) {
             </div>
             <button onClick={handleAddNewFriend} className={cx("add-friend-button", addedFriendId===null&&"disabled")}>Add Friend</button>
           </div>
-        </div>
       </div>
     </>
   );
