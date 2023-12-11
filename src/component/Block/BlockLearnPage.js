@@ -4,6 +4,7 @@ import { useCourseContext } from "../../context/CourseContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
+import catFoot from '../../assets/images/Cat_leg.png';
 
 const cx = classNames.bind(Style);
 export const BlockLearnPage = ({block, index, level}) => {
@@ -57,7 +58,8 @@ export const BlockLearnPage = ({block, index, level}) => {
                 {lessons?.map((lesson, lessonIndex) => (
                     <div className="col-4 col-sm-3 col-lg-2 d-flex justify-content-center aligns-items-center p-1">
                     <button
-                        style={{backgroundColor: `${checkProgressOfPlayer(lessonIndex, index) || lessonIndex===0?block?.blockColor:"rgb(229,229,229)"}`}}
+                        
+                        style={{width: "7rem", height: "6rem",backgroundColor: `${checkProgressOfPlayer(lessonIndex, index) || lessonIndex===0?block?.blockColor:"rgb(229,229,229)"}`}}
                         className={cx(
                         "lesson-disable",
                         "button-to-get-in-lesson",
@@ -70,7 +72,8 @@ export const BlockLearnPage = ({block, index, level}) => {
                         disabled={checkProgressOfPlayer(lessonIndex, index) || lessonIndex===0?false: true}
                     >
                         <img
-                        src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg"
+                        src={catFoot}
+                        width={30}
                         alt=""
                         />
                     </button>

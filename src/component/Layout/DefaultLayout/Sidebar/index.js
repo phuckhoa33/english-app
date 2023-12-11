@@ -27,7 +27,7 @@ function Sidebar() {
   const [checked, setChecked] = useState(true);
   const {course} = useCourseContext();
   const {resetAllCachingTestDetails} = useTestContext();
-  const [chosenItem, setChosenItem] = useState("");
+  const [chosenItem, setChosenItem] = useState("learn");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,10 +35,8 @@ function Sidebar() {
     if(localStorage.getItem("token")){
       setChecked(false);
     }
-    if(location.pathname.includes("learn")){
-      setChosenItem("learn");
-    }
-    else if(location.pathname.includes("practice") || location.pathname.includes("randomTest")){
+    
+    if(location.pathname.includes("practice") || location.pathname.includes("randomTest")){
       setChosenItem("practice");
     }
     else if(location.pathname.includes("test")){
@@ -110,6 +108,7 @@ function Sidebar() {
                 "text-md-start",
                 `${chosenItem==="learn"&&"chosen-sidebar"}`
               )}
+              onClick={() => setChosenItem("learn")}
               to="/learn"
               
             >
