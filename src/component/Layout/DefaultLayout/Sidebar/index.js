@@ -62,9 +62,6 @@ function Sidebar() {
 
   const handleClick = () => {
     resetAllCachingTestDetails();
-    if(location.pathname.includes("readQuestionPage")){
-      navigate("/");
-    }
   }
 
   const handleClickItem = (itemName) => {

@@ -247,7 +247,6 @@ export const TestProvider = ({children}) => {
         <TestContext.Provider value={{
             testDetail,
             questionNumber,
-            testDetail,
             score,
             loading,
             exp,

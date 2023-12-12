@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 import classNames from "classnames/bind";
 import Style from "./ReadQuestionPage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBook,
   faClock,
-  faPencilAlt,
-  faSearch,
+  faPencilAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useTestContext } from '../../context/TestContext';
