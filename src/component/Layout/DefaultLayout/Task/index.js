@@ -1,8 +1,7 @@
 import classNames from "classnames/bind";
 import Style from "./Task.module.scss";
 import { useCourseContext } from "../../../../context/CourseContext";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import UserEnviroment from "../../LayoutsComponent/UserEnviroment";
 import { useTaskContext } from "../../../../context/TaskContext";
 import { useUserContext } from "../../../../context/UserContext";
@@ -10,26 +9,14 @@ import { useEffect, useState } from "react";
 
 const cx = classNames.bind(Style);
 
-const contents =[
-                [
-                  "Thử Super Miễn Phí", 
-                  "Không quảng cáo, bài luyện tập cá nhân hóa, và không giới \nhạn số lần chinh phục Huyền thoại!",
-                  "Thử 2 tuần miễn phí",
-                  "/premium"
-                ],
-                [
-                  "Làm Bài Test Đầu Vào",
-                  "Làm bài test đầu vào để chúng tôi có thể xác định đúng trình độ của bạn và đưa ra các bài học tốt nhất cho bạn",
-                  "Tham gia ngay",
-                  "/readQuestionPage/entryTest/2701034384"
-                ]
-              ]
+
 
 function Task() {
   const {checkOpenRank, course} = useCourseContext();
   const {dailyTask} = useTaskContext();
   const {user} = useUserContext();
   const [checkedUser, setCheckedUser] = useState(1);
+  const navigate = useNavigate();
   const contents =[
     [
       "Thử Super Miễn Phí", 
@@ -42,16 +29,25 @@ function Task() {
       "Làm bài test đầu vào để chúng tôi có thể xác định đúng trình độ của bạn và đưa ra các bài học tốt nhất cho bạn",
       "Tham gia ngay",
       `/readQuestionPage/entryTest/${course?.id}`
+    ],
+    [
+      "Làm Bài Test Để vượt cáp nào",
+      "Làm bài Test này giúp bạn có thể vượt khóa học này sang khóa học khác với chỉ 1 bài test với những yêu cầu cụ thể",
+      "Tham gia ngay",
+      `/readQuestionPage/entryTest/${course?.id}`
     ]
   ]
 
   useEffect(() => {
     const account = JSON.parse(localStorage.getItem("account"));
-    if(user?.id) {
+    if(user?.id && !user?.premium) {
       setCheckedUser(0);
     }
-    else if(account?.level){
-      setCheckedUser(2);
+    else if(account?.level ){
+      setCheckedUser(1);
+    }
+    else {
+      setCheckedUser(2)
     }
   }, [user])
   
@@ -63,50 +59,48 @@ function Task() {
 
           <UserEnviroment />
           {/*  */}
-          {checkedUser !== 2 && (
-            <div
-              className={cx(
-                "card",
-                "premium-card-container",
-                "rounded-4",
-                "p-3",
-                "my-5"
-              )}
-            >
-              <div className="card-body">
-                <h5 className={cx("premium-card-title")}>{contents[checkedUser][0]}</h5>
-                <div className={cx("row", "my-4")}>
-                  <div className="col-8">
-                    <p
-                      className={cx(
-                        "premium-card-text",
-                        "my-4",
-                        "align-items-center"
-                      )}
-                    >
-                      {contents[checkedUser][1]}
-                    </p>
-                  </div>
-                  <div className="col-4">
-                    <img
-                      src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
-                      className="img-fluid"
-                      alt=""
-                    />
-                  </div>
+
+          <div
+            className={cx(
+              "card",
+              "premium-card-container",
+              "rounded-4",
+              "p-3",
+              "my-5"
+            )}
+          >
+            <div className="card-body">
+              <h5 className={cx("premium-card-title")}>{contents[checkedUser][0]}</h5>
+              <div className={cx("row", "my-4")}>
+                <div className="col-8">
+                  <p
+                    className={cx(
+                      "premium-card-text",
+                      "my-4",
+                      "align-items-center"
+                    )}
+                  >
+                    {contents[checkedUser][1]}
+                  </p>
                 </div>
-
-
-                <Link
-                  to={contents[checkedUser][3]}
-                  className={cx("premium-submit-btn", "btn", "rounded-4")}
-                >
-                  {contents[checkedUser][2]}
-                </Link>
+                <div className="col-4">
+                  <img
+                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
+                    className="img-fluid"
+                    alt=""
+                  />
+                </div>
               </div>
-            </div>
 
-          )}
+
+              <Link
+                to={contents[checkedUser][3]}
+                className={cx("premium-submit-btn", "btn", "rounded-4")}
+              >
+                {contents[checkedUser][2]}
+              </Link>
+            </div>
+          </div>
           {checkOpenRank !== null && checkedUser === 0 && (
             <div
               className={cx(
@@ -155,7 +149,7 @@ function Task() {
                   </h5>
                 </div>
                 <div className="col-4">
-                  <a href="/quest">Xem tất cả</a>
+                  <p  style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => navigate('/quest')}>Xem tất cả</p>
                 </div>
               </div>
               {dailyTask?.map(task => (

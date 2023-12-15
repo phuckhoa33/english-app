@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const API = axios.create({baseURL: "https://user-backend-meolearn.onrender.com/api"});
-const APICourse = axios.create({baseURL: "https://course-backend-meolearn.onrender.com/api"});
-// const API = axios.create({baseURL: "http://localhost:8870/api"});
-// const APICourse = axios.create({baseURL: "http://localhost:8871/api"}); 
+// const API = axios.create({baseURL: "https://user-backend-meolearn.onrender.com/api"});
+// const APICourse = axios.create({baseURL: "https://course-backend-meolearn.onrender.com/api"});
+const API = axios.create({baseURL: "http://localhost:8870/api"});
+const APICourse = axios.create({baseURL: "http://localhost:8871/api"}); 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem("token")){
         req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("token"))}`;
@@ -37,7 +37,7 @@ export const sendEmailForResetPasswordApi = (formValue) => API.post("/user/sende
 export const checkTokenResetPasswordApi = token => API.get(`/user/checkTokenForResetPassword/${token}`);
 export const getAnswersByChatGPT = (formValue) => API.post(`/chatgpt/solverAnswerQueston`, formValue);
 export const payBill = (formValue) => API.post("/bill/insertbill", formValue);
-
+export const createAchivement = (formValue) => API.post("/achivement/insertachivement", formValue);
 
 
 

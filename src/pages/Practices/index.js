@@ -2,50 +2,70 @@ import classNames from "classnames/bind";
 import Style from "./Practices.module.scss";
 
 import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
+import { useUserContext } from "../../context/UserContext";
 
 const cx = classNames.bind(Style);
 
 function Tests() {
+  const navigate = useNavigate();
+  const {user} = useUserContext();
+
+  console.log(user);
+  const handleClickToPremium = () => {
+  
+    if(user){
+      navigate("/premium");
+    }
+    else {
+      navigate("/signin");
+    }
+  }
+
+
   return (
     <>
       <div className="container justify-content-center align-items-center d-flex">
         <div className={cx("practice-section-container")}>
-          <div className={cx("card", "card-container", "my-4")}>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-2 p-3">
-                  <img
-                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
-                    className="w-100"
-                    alt=""
-                  />
+          {!user?.premium && (
+            <div className={cx("card", "card-container", "my-4")}>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-2 p-3">
+                    <img
+                      src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
+                      className="w-100"
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-10">
+                    <p className={cx("card-text", "premium-text")}>
+                      Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
+                      độc quyền của Super
+                    </p>
+                  </div>
                 </div>
-                <div className="col-10">
-                  <p className={cx("card-text", "premium-text")}>
-                    Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
-                    độc quyền của Super
-                  </p>
-                </div>
+                <button
+                  className={cx(
+                    "btn",
+                    "premium-btn",
+                    "w-100",
+                    "p-3",
+                    "my-3",
+                    "rounded-4"
+                  )}
+                  onClick={handleClickToPremium}
+                >
+                  Bắt đầu 14 ngày dùng thử miễn phí
+                </button>
               </div>
-              <Link
-                to={"/premium"}
-                className={cx(
-                  "btn",
-                  "premium-btn",
-                  "w-100",
-                  "p-3",
-                  "my-3",
-                  "rounded-4"
-                )}
-              >
-                Bắt đầu 14 ngày dùng thử miễn phí
-              </Link>
             </div>
-          </div>
+          )}
+            
 
          
           <h1
-            className={cx("advance-practice-section-sub-title", "pb-3", "ps-4")}
+            className={cx("advance-practice-section-sub-title", "pb-3", "ps-4", "mt-5")}
           >
             Chứng chỉ Quốc Tế
           </h1>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { createNewStreak, getAllTestByTestType, getAnswersByChatGPT, getRandomTest, getTest } from "../axios/userAxios";
 import { useNavigate } from "react-router";
 import { useUserContext } from "./UserContext";
@@ -61,7 +61,7 @@ export const TestProvider = ({children}) => {
     const [tests, setTests] = useState([]);
 
     const navigate = useNavigate();
-    const {updateCurrentLevel, player, updatePlayer} = useUserContext();
+    const {player, updatePlayer, setPlayer, createNewAchievement, user} = useUserContext();
 
 
 
@@ -115,13 +115,13 @@ export const TestProvider = ({children}) => {
         localStorage.setItem("skippedQuestionNumber", skippedQuestionNumberStorage);
     }
 
-    const determineLevel = () => {
-        const scoreTotal = questions?.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue.score;
-          }, 0);
-        const percent = Math.floor(score/scoreTotal*100);
-        return Math.floor(percent/20);
-    }
+    // const determineLevel = () => {
+    //     const scoreTotal = questions?.reduce((accumulator, currentValue) => {
+    //         return accumulator + currentValue.score;
+    //       }, 0);
+    //     const percent = Math.floor(score/scoreTotal*100);
+    //     return Math.floor(percent/20);
+    // }
 
     const getQuestion = async(testype, playerId, funcShow) => {
         if(questionNumber > questions?.length || (questions[questionNumber] === undefined && questionNumber !== 0)) {
@@ -143,41 +143,69 @@ export const TestProvider = ({children}) => {
                 return skippedQuestions[skippedQuestionNumber];
             }
         }
+
+        if(player?.id) {
+            createNewStreakItem(playerId);
+        }
         return questions[questionNumber];
     };
 
     const calculateScoreForTest = async(testype, playerId) => {
         const scoreTotal = questions?.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.score;
-          }, 0);
-        if(score/scoreTotal>75){
-            updateCurrentLevel(testype);    
-        }
-        if(JSON.parse(localStorage.getItem("account"))?.level && !player?.userId){
-            const account = {
-                currentCourse: null,
-                currentBlock: null,
-                currentLesson: null,
-                level: determineLevel()+1
-            }
-            localStorage.setItem("account", JSON.stringify(account));
-        }
-        if(player?.id){
+        }, 0);
+        
+        if(score/scoreTotal>= 0.8){
             player.expPoint += 10;
-            await updatePlayer(player);
-            createNewStreakItem(playerId);
+            player.score += 5;
+
+            player.level = levelUp(player?.level);
+            setPlayer(player);
+
+        }
+        else if(score === scoreTotal && player?.id) {
+            const achivement = {
+                playerId,
+                score,
+                sourceId: "",
+                title: "Hoàn thành bài học với điểm tối đa"
+            }
+
+            await createNewAchievement(achivement);
+        }
+        
+
+        if(player?.id){
+            updatePlayer(player);
         }
         else {
-            const account = JSON.parse(localStorage.getItem("acount"));
-            if(account?.expoint){
+            localStorage.setItem("account", JSON.stringify(player));
 
-                account.expPoint += 10;
-            }
-            else {
-                account.expPoint = 10;
-            }
-            localStorage.setItem("acount", JSON.stringify(account));
         }
+
+
+    }
+
+
+    const levelUp = (level) => {
+        let levelArray = level.split(".");
+        let courseLevel = Number.parseInt(levelArray[0]);
+        let blockLevel = Number.parseInt(levelArray[1]);
+        let lessonLevel = Number.parseInt(levelArray[2]);
+
+        lessonLevel += 1;
+        if(lessonLevel === 9) {
+            blockLevel += 1;
+            lessonLevel = 0
+            if(blockLevel === 3) {
+                courseLevel += 1;
+                blockLevel = 0;
+                lessonLevel = 0;
+            }
+        }
+        
+        return courseLevel+"."+blockLevel+"."+lessonLevel;
+
     }
 
     const createNewStreakItem = async(playerId) => {
@@ -231,6 +259,7 @@ export const TestProvider = ({children}) => {
         setLoading(false);
         if(answersStorage===null || answersStorage.length < 2){
             const {data} = await getAnswersByChatGPT(answerQuestion);
+            console.log(data);
             setAnswers(data.data);
             localStorage.setItem("answers", JSON.stringify(data.data));
         }

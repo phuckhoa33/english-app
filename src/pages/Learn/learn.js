@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from "classnames/bind";
 import Style from "./learn.module.scss";
 import { BlockLearnPage } from "../../component/Block/BlockLearnPage";

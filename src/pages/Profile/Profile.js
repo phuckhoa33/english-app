@@ -2,7 +2,8 @@ import classNames from "classnames/bind";
 import Style from "./Profile.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import {useLocation} from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Follower from "../../component/Layout/ProfileLayout/Follower";
 
 const cx = classNames.bind(Style);
 
@@ -10,7 +11,8 @@ function Profile() {
   const {user} = useUserContext();
 
   const { pathname } = useLocation();
-
+  const [modalState, setModalState] = useState(false);
+  
   useEffect(() => {
     // "document.documentElement.scrollTo" is the magic for React Router Dom v6
     document.documentElement.scrollTo({
@@ -19,6 +21,11 @@ function Profile() {
       behavior: "instant", // Optional if you want to skip the scrolling animation
     });
   }, [pathname]);
+  const toggleModalHandle = () => {
+    setModalState(!modalState);
+    alert("hello");
+  };
+
 
   return (
     <div
@@ -61,8 +68,16 @@ function Profile() {
             </div>
           </div>
         </div>
+        <div className={cx("add-friend-section", "d-block", "d-lg-none")}>
+          {/* <h1 className={cx("process-section-title", "my-2", "title")}>
+            Bạn bè
+          </h1> */}
+          <Follower clickToOpenHandle={toggleModalHandle} />
+        </div>
         <div className={cx("process-section", "mt-5")}>
-          <h1 className={cx("process-section-title", "my-2")}>Thống Kê</h1>
+          <h1 className={cx("process-section-title", "my-2", "title")}>
+            Thống kê
+          </h1>
           <div className="row">
             <div className={cx("col-6", "my-3", "mx-0")}>
               <div
@@ -192,7 +207,9 @@ function Profile() {
           </div>
         </div>
         <div className={cx("archievment-section", "mt-5")}>
-          <h1 className={cx("achievment-section-title")}>Thành Tích</h1>
+          <h1 className={cx("achievment-section-title", "title")}>
+            Thành tích
+          </h1>
           <div className={cx("achievment-container")}>
             <ul className={cx("achievment-list", "mt-3")}>
               {/* achievment */}

@@ -1,19 +1,18 @@
 import classNames from "classnames/bind";
 import Style from "./UserEnviroment.module.scss";
 import { useUserContext } from "../../../../context/UserContext";
-import { useCourseContext } from "../../../../context/CourseContext";
 
 const cx = classNames.bind(Style);
 
 function UserEnviroment() {
   const {player, streakTotal, hearts} = useUserContext();
-  const {checkOpenRank} = useCourseContext();
   return (
     <>
-      <div className="row">
+      <div className="row w-100">
+            
             <div
               className={cx(
-                "col-3",
+                "col-4",
                 "d-flex",
                 "justify-content-around",
                 "align-items-center",
@@ -24,11 +23,11 @@ function UserEnviroment() {
                 src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/398e4298a3b39ce566050e5c041949ef.svg"
                 alt=""
               />
-              {streakTotal}
+              {player?.id ? streakTotal: 0}
             </div>
             <div
               className={cx(
-                "col-3",
+                "col-4",
                 "d-flex",
                 "justify-content-around",
                 "align-items-center",
@@ -43,7 +42,7 @@ function UserEnviroment() {
             </div>
             <div
               className={cx(
-                "col-3",
+                "col-4",
                 "d-flex",
                 "justify-content-around",
                 "align-items-center",

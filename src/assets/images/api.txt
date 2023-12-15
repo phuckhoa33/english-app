@@ -1,0 +1,9 @@
+- Insert lesson thì auto tạo cho lesson đó 10 câu hỏi có correctAnswer, wrongAnswer 1, 2, 3 trống. 
+
+- Tạo API lấy 5 hoặc 10 user có điểm hoặc level cao nhất hoặc qua nhiều lesson nhất
+
+- API hiển thị bài test hoặc practice có số người tham gia vào nhiều nhất (nếu mình tạo nhiều thì cho 5 -10)
+
+- Tính tổng số người dùng theo tháng kiểu tháng này có bao người dùng mới, rồi tháng trước có bao nhiêu người dùng mới
+
+- đo lượng người dùng theo level từ 5-10 có bao nhiêu người, 10-30 có bao nhiêu người (làm tầm 5 cái nấc như vậy)

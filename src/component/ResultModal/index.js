@@ -1,22 +1,28 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from "classnames/bind";
 import Style from "./ResultModal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleArrowDown, faClose } from "@fortawesome/free-solid-svg-icons";
 import { useTestContext } from "../../context/TestContext";
 import { useEffect, useState } from "react";
+import {useLocation} from 'react-router-dom';
 import {Spinner} from '../../component/Spinner/Spinner';
 
 const cx = classNames.bind(Style);
 
 function ResultModal(props) {
-  const {chosenAnswers, questions, answers, scoreTotalOfTest} = useTestContext();
+  const {chosenAnswers, questions, answers} = useTestContext();
   const [questionsResult, setQuestionsResult] = useState([]);
   const [content, setContent] = useState(true);
   const [answer, setAnswer] = useState();
+  const location = useLocation();
 
   useEffect(() => {
-    handleCheckCorrectOrWrong();
-  }, [scoreTotalOfTest])
+    if(location.pathname.includes("complete")){
+      handleCheckCorrectOrWrong();
+    }
+  }, [location.pathname])
+
 
   const handleCheckCorrectOrWrong = () => {
     const copiedQuestions = [];
@@ -50,8 +56,11 @@ function ResultModal(props) {
 
 
   const handleChangeContent = (index) => {
-    setAnswer(answers[index]);
-    setContent(!content);
+    if(answers) {
+      setAnswer(answers[index]);
+      setContent(!content);
+
+    }
   }
 
   return (

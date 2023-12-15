@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect } from 'react';
 import loadingGif from '../../assets/gif/loading.gif';
@@ -22,7 +23,6 @@ export const LoadingPage = () => {
     }, [])
 
     useEffect(() => {
-        console.log(loading);
 
         const timeout = setTimeout(() => {
             if(type !== undefined && questionType!== undefined && lessonNumber!== undefined) {

@@ -1,11 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from "classnames/bind";
 import Style from "./Payment.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from 'react-router-dom';
 import Tabs from "../../component/Tab";
+import { useEffect } from "react";
+import { usePaymentContext } from "../../context/PaymentContext";
 const cx = classNames.bind(Style);
 
 function Payment() {
+  const navigate = useNavigate();
+  const {paymentDetail} = usePaymentContext();
+
+
+
+  useEffect(() => {
+    if(!paymentDetail.userId){
+      navigate("/NotFound");
+    }
+    else {
+      localStorage.setItem("paymentDetail", JSON.stringify(paymentDetail));
+    }
+  }, [])
 
   return (
     <>

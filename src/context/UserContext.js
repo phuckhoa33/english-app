@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import { addFriend, checkTokenResetPasswordApi, getFriend, getLeaderBoard, getPlayer, getStreaks, getUser, getUserExceptUserId, login, sendEmailForResetPasswordApi, updatePlayerApi, updateUserApi } from "../axios/userAxios";
+import { addFriend, checkTokenResetPasswordApi, createAchivement, getFriend, getLeaderBoard, getPlayer, getStreaks, getUser, getUserExceptUserId, login, sendEmailForResetPasswordApi, updatePlayerApi, updateUserApi } from "../axios/userAxios";
 import { useCourseContext } from "./CourseContext";
 
 const UserContext = createContext();
@@ -22,38 +23,35 @@ export const UserProvider = ({children}) => {
         registerAdmin();
     }, [])
     
-    
-
-    useEffect(() => {
+    const checkPlayerAndGetCourse = () => {
         if(player){
             getLessonsAndBlocksAndLessons(player.currentLevel);
             localStorage.removeItem("account");
         }
         else {
-            const account = JSON.parse(localStorage.getItem("account"));
-            if(account?.level) {
-                getLessonsAndBlocksAndLessons(account?.level);
+            let account = JSON.parse(localStorage.getItem("account"));
+            if(account === null) {
+                account = {
+                    level: "1.0.0",
+                    currentLesson: 1,
+                    currentBlock: 1,
+                    currentCourse: 1,
+                    expPoint: 0,
+                    hearts: 5,
+                    score: 0
+                }
                 
             }
-            else {
-                const newAccount = {
-                    level: 1,
-                    currentLesson: null,
-                    currentBlock: null,
-                    currentCourse: null,
-                    exPoint: 0,
-                    hearts: 5,
-                    score: 0,
-                    streak: 0
-                }
-                localStorage.setItem("account", JSON.stringify(newAccount));
-                setHearts(newAccount.hearts);
-                setPlayer(newAccount);
-                setStreak(newAccount.streak);
-                getLessonsAndBlocksAndLessons(1);
-            }
+            console.log(account);
+            localStorage.setItem("account", JSON.stringify(account));
+            setHearts(account.hearts);
+            setPlayer(account);
+            setStreak(account.streak);
+            getLessonsAndBlocksAndLessons(account?.level);
         }
-    }, [])
+        
+    }
+
 
     const registerUser = async() => {
         try {
@@ -74,6 +72,8 @@ export const UserProvider = ({children}) => {
             localStorage.removeItem('token');
             setUser(null);
         }
+
+        checkPlayerAndGetCourse();
     }
 
     const getUsersByCondition = async(id) => {
@@ -108,12 +108,7 @@ export const UserProvider = ({children}) => {
         setUser(account);
     }
 
-    const updateCurrentLevel = async(level) => {
-        const updatedLevel = "."+player.currentLevel+level;
-        console.log(updatedLevel);
-        player.currentLevel = updatedLevel;
-        await updatePlayer(player);
-    }
+
 
     const updatePlayer = async(player) => {
         try {
@@ -127,7 +122,7 @@ export const UserProvider = ({children}) => {
         }
     }
 
-    const updateUser = async(oldPassword, reset) => {
+    const updateUser = async(oldPassword, reset, premium) => {
         const userInput = {
             username: user.username,
             password: user.password,
@@ -136,6 +131,9 @@ export const UserProvider = ({children}) => {
             id: user.id,
             roleId: user.roleId,
             oldPassword
+        }
+        if(premium) {
+            userInput.premium = premium;
         }
         const {data} = await updateUserApi(userInput);
         if(data.data.token && reset == null){
@@ -192,6 +190,12 @@ export const UserProvider = ({children}) => {
         return data.data;
     }
 
+
+    const createNewAchievement = async(achivement) => {
+        const {data} = createAchivement(achivement);
+        console.log(data);
+    }
+
     return (
         <UserContext.Provider
             value={{
@@ -204,13 +208,14 @@ export const UserProvider = ({children}) => {
                 users,
                 ranks,
                 setUser,
+                setPlayer,
                 updatePlayer,
                 registerUser,
                 logout,
                 updateUser,
                 setHearts,
+                createNewAchievement,
                 checkProgressOfPlayer,
-                updateCurrentLevel,
                 addNewFriend,
                 checkChangeProperty,
                 getRankOfCurrentPlayer,

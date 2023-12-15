@@ -39,7 +39,7 @@ const publicRoutes = [
   { path: "/readQuestionPage/:testType/:testId", component: ReadQuestionPage },
   { path: "/payment", component: Payment, layout: PremiumLayout },
   {
-    path: "/payment/success",
+    path: "/payment/success/:paymentId",
     component: PaymentSuccess,
     layout: PremiumLayout,
   },

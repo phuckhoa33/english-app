@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import classNames from "classnames/bind";
 import Style from "./Shop.module.scss";
 import { Link } from "react-router-dom";
@@ -5,16 +6,28 @@ import { useEffect, useState } from "react";
 import BuyingPopup from "../../component/Popup/BuyingPopup";
 import CantBuyingPopup from "../../component/Popup/CantBuyingPopup";
 import { useUserContext } from "../../context/UserContext";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const cx = classNames.bind(Style);
 
 function Shop() {
   const [showBuyingPopup, setShowBuyingPopup] = useState(false);
   const [buyItem, setBuyItem] = useState();
-  const {player} = useUserContext();
+  const {player, user} = useUserContext();
 
   const { pathname } = useLocation();
+
+  const navigate = useNavigate();
+
+
+  const handleClickToPremium = () => {
+    if(user){
+      navigate("/premium");
+    }
+    else {
+      navigate("/signin");
+    }
+  }
 
   useEffect(() => {
     // "document.documentElement.scrollTo" is the magic for React Router Dom v6
@@ -43,38 +56,41 @@ function Shop() {
       </div>
       <div className={cx("container", "d-flex", "justify-content-center")}>
         <div className={cx("shop-container")}>
-          <div className={cx("card", "card-container", "my-4")}>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-2 p-3">
-                  <img
-                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
-                    className="w-100"
-                    alt=""
-                  />
+          {!user?.premium && (
+            <div className={cx("card", "card-container", "my-4")}>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-2 p-3">
+                    <img
+                      src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/e07e459ea20aef826b42caa71498d85f.svg"
+                      className="w-100"
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-10">
+                    <p className={cx("card-text", "premium-text")}>
+                      Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
+                      độc quyền của Super
+                    </p>
+                  </div>
                 </div>
-                <div className="col-10">
-                  <p className={cx("card-text", "premium-text")}>
-                    Bắt đầu 2 tuần dùng thử miễn phí để tận hưởng các quyền lợi
-                    độc quyền của Super
-                  </p>
-                </div>
+                <button
+                  className={cx(
+                    "btn",
+                    "premium-btn",
+                    "w-100",
+                    "p-3",
+                    "my-3",
+                    "rounded-4"
+                  )}
+                  onClick={handleClickToPremium}
+                >
+                  Bắt đầu 14 ngày dùng thử miễn phí
+                </button>
               </div>
-              <Link
-                to={"/premium"}
-                className={cx(
-                  "btn",
-                  "premium-btn",
-                  "w-100",
-                  "p-3",
-                  "my-3",
-                  "rounded-4"
-                )}
-              >
-                Bắt đầu 14 ngày dùng thử miễn phí
-              </Link>
             </div>
-          </div>
+
+          )}
           <h1 className={cx("shop-list-title", "py-5")}>Trái tim</h1>
           <div className={cx("heart-shop-container")}>
             <ul className={cx("heart-shop-list")}>

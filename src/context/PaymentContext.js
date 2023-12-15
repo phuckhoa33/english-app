@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { payBill } from "../axios/userAxios";
@@ -25,15 +26,6 @@ export const PaymentProvider = ({children}) => {
         const paymentDetailStorage = JSON.parse(localStorage.getItem("paymentDetail"));
         return paymentDetailStorage===null?initialPaymentDetail:paymentDetailStorage;
     });
-    const {user} = useUserContext;
-    const location = useLocation();
-
-    useEffect(() => {
-        setPaymentDetail({...paymentDetail, userId: user?.id});
-        if(location.pathname === "/payment" || location.pathname === "premium"){
-            localStorage.setItem("paymentDetail", JSON.stringify(paymentDetail));
-        }
-    }, [location])
 
 
     const payBillApi = async() => {

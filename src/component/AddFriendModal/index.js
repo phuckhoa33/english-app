@@ -78,7 +78,7 @@ function AddFriendModal(props) {
                   "search-friend-to-add-input",
                   "px-3",
                   "py-2",
-                  "rounded-3"
+                  "rounded-4"
                 )}
                 value={search}
                 onChange={handleSearch}
@@ -98,13 +98,7 @@ function AddFriendModal(props) {
                 "px-3"
               )}
             >
-              <div
-                className={cx(
-                  "user-searched-list-container",
-                  "rounded-3",
-                  "p-2"
-                )}
-              >
+              <div className={cx("user-searched-list-container", "rounded-4")}>
 
                 <ul className={cx("friend-list")}>
                   {users?.length > 0 ? (

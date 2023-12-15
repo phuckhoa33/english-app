@@ -2,9 +2,11 @@ import classNames from "classnames/bind";
 import Style from "./Tab.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
 import { usePaymentContext } from "../../context/PaymentContext";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { useUserContext } from "../../context/UserContext";
 const cx = classNames.bind(Style);
 const initialOptions = {
   clientId: "Ad9Stp6E4rI9GCmOUdc5QEl3imwEmmjj6b-wYblC05er3PeaKvhy6FEgCMNMX7GreVMlLb0KwyFQYmuI",
@@ -16,6 +18,10 @@ function Tabs() {
   const [paymentToggle, setPaymentToggle] = useState(1);
   const [showOtherCurrency, setShowOtherCurrency] = useState("");
   const {paymentDetail, setPaymentDetail, payBillApi, saveBillDetail} = usePaymentContext();
+  const {updateUser} = useUserContext();
+  
+  const navigate = useNavigate();
+  
   const updateToggleHandle = (id) => {
     setPaymentToggle(id);
   };
@@ -28,16 +34,34 @@ function Tabs() {
   }
 
   const handleSubmit = async() => {
-    
     await payBillApi();
   }
 
   const createOrder = async(data, actions) => {
-    await payBillApi();
+    localStorage.removeItem("paymentDetail");
+    
+    return actions.order.create({
+      purchase_units: [
+        {
+          description: paymentDetail.description,
+          amount: {
+            value: paymentDetail.total
+          }
+        }
+      ]
+    })
+
+
   }
 
-  const onApprove = (data, actions) => {
-    
+  const onApprove = async(data, actions) => {
+    const order = await actions.order.capture();
+    await payBillApi();
+    updateUser("", null, true);
+    if(order) {
+      localStorage.removeItem("paymentDetail");
+      navigate(`/payment/success/${order.id}`);
+    }
   }
 
   return (
@@ -326,6 +350,7 @@ function Tabs() {
                   <PayPalButtons 
                     createOrder={(data, actions) => createOrder(data, actions)}
                     onApprove={(data, actions) => onApprove(data, actions)}
+                    onError={(err) => navigate("/payment/errror")}
                   />
 
                 </PayPalScriptProvider>

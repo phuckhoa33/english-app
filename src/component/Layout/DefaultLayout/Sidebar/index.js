@@ -74,12 +74,15 @@ function Sidebar() {
         <div
           className={cx(
             "container",
-            "px-3",
+            "p-0",
+            "px-sm-3",
             "border-right",
             "nav-list-container"
           )}
         >
-          <div className={cx("d-flex", "flex-column", "nav-list")}>
+          <div
+            className={cx("d-flex", "flex-row", "flex-sm-column", "nav-list")}
+          >
             <div
               className={cx(
                 "my-4",
@@ -88,8 +91,16 @@ function Sidebar() {
                 "justify-content-center",
                 "align-items-center"
               )}
+              onClick={() => setChosenItem("learn")}
             >
-              <Link to="/learn">
+              <Link className={cx(
+                "mb-2",
+                "nav-item",
+                "rounded-4",
+                "text-center",
+                "text-md-start",
+                `${chosenItem==="learn"&&"isActive"}`
+              )} to="/learn">
                 <div className={cx("logo-container")}>
                   <img src={logo} alt="logo" className="img-fluid" />
                 </div>
@@ -103,7 +114,7 @@ function Sidebar() {
                 "rounded-4",
                 "text-center",
                 "text-md-start",
-                `${chosenItem==="learn"&&"chosen-sidebar"}`
+                `${chosenItem==="learn"&&"isActive"}`
               )}
               onClick={() => setChosenItem("learn")}
               to="/learn"
@@ -128,7 +139,7 @@ function Sidebar() {
                 "text-md-start",
                 "position-relative",
                 "practice-open-sub-menu",
-                `${chosenItem==="practice"&&"chosen-sidebar"}`
+                `${chosenItem==="practice"&&"isActive"}`
               )}
             >
               <FontAwesomeIcon style={{ fontSize: "20px" }} icon={faDumbbell} />
@@ -167,7 +178,7 @@ function Sidebar() {
                 "text-md-start",
                 "nav-item",
                 "rounded-4",
-                `${chosenItem==="test"&&"chosen-sidebar"}`
+                `${chosenItem==="test"&&"isActive"}`
               )}
               onClick={() => handleClickItem("test")}
               to="/tests"
@@ -184,7 +195,7 @@ function Sidebar() {
                 "text-md-start",
                 "nav-item",
                 "rounded-4",
-                `${chosenItem==="leaderBoard"&&"chosen-sidebar"}`
+                `${chosenItem==="leaderBoard"&&"isActive"}`
               )}
               to="/leaderBoard"
               onClick={() => handleClickItem("leaderBoard")}
@@ -207,7 +218,7 @@ function Sidebar() {
                 "text-md-start",
                 "nav-item",
                 "rounded-4",
-                `${chosenItem==="quest"&&"chosen-sidebar"}`
+                `${chosenItem==="quest"&&"isActive"}`
               )}
               to="/quest"
               onClick={() => handleClickItem("quest")}
@@ -230,7 +241,7 @@ function Sidebar() {
                 "text-md-start",
                 "nav-item",
                 "rounded-4",
-                `${chosenItem==="shop"&&"chosen-sidebar"}`
+                `${chosenItem==="shop"&&"isActive"}`
               )}
               to="/shop"
               onClick={() => handleClickItem("shop")}
@@ -254,7 +265,7 @@ function Sidebar() {
                 "text-md-start",
                 "nav-item",
                 "rounded-4",
-                `${chosenItem==="profile"&&"chosen-sidebar"}`
+                `${chosenItem==="profile"&&"isActive"}`
               )}
               to="/profile"
               onClick={() => handleClickItem("profile")}

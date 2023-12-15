@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { getCourse } from "../axios/userAxios";
 
-export const CourseContext = createContext();
+const CourseContext = createContext();
 
 export const CourseProvider = ({children}) => {
     const [course, setCourse] = useState();
@@ -11,7 +11,7 @@ export const CourseProvider = ({children}) => {
 
 
     const getLessonsAndBlocksAndLessons = async(level) => {
-        const title = `Course level ${level}`;
+        const title = `Course Level 1`;
         const {data} = await getCourse(title);
         setLoading(false);
          

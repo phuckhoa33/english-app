@@ -1,8 +1,10 @@
 import Style from "./Payment.module.scss";
 import classNames from "classnames/bind";
+import {useParams} from 'react-router-dom';
 const cx = classNames.bind(Style);
 
 export const PaymentSuccess = () => {
+    const {paymentId} = useParams();
     return (
         <div className={cx("container")}>
         <div className={cx("printer-top")}></div>
@@ -21,7 +23,7 @@ export const PaymentSuccess = () => {
                     </div>
                     <div className={cx("order-details")}>
                         <div className={cx("order-number-label")}>Transaction ID</div>
-                        <div className={cx("order-number")}>123456789</div>
+                        <div className={cx("order-number")}>{paymentId}</div>
                         <div className={cx("complement")}>Thank You!</div>
                     </div>
                 </div>

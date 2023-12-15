@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-computed-key */
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import ListenLayout from "./ListenLayout";
 import ReadLayout from "./ReadLayout";
@@ -15,7 +17,6 @@ import LessonHeader from "../../component/LessonHeader";
 import ResultModal from "../../component/ResultModal";
 import SkippedPopup from "../../component/Popup/SkiippedPopup";
 import DontClosePopup from "../../component/Popup/DontClosePopup";
-import { useLoadingAndTiming } from "../../hooks/useLoadingAndTiming";
 
 const cx = classNames.bind(Style);
 
@@ -55,11 +56,9 @@ function Lesson() {
   const [answerActive, setAnswerActive] = useState([]);
   const [chosenAnswer, setChosenAnswer] = useState([]);
   const {lessonNumber} = useParams();
-  const loading = useLoadingAndTiming();
   const hasMounted = useRef(true);
 
   useEffect(() => {
-    
     if(hasMounted.current) {
       hasMounted.current = false;
       const fetchData = async() => {
@@ -96,7 +95,6 @@ function Lesson() {
     addNewAnswerQuestionItem();
 
     let checked = false;
-
     if(questionNumber<questionsTotal){
       if(questions[questionNumber].correctAnswer===chosenAnswer){
         checked = true;
@@ -130,7 +128,6 @@ function Lesson() {
       }
     }
     saveTestDetailInLocalStorage();
-
   }
 
   const skipQuestion = () => {
