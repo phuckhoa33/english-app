@@ -105,7 +105,14 @@ function AddFriendModal(props) {
                     <>
                       {users?.map((user) => (
                         <li
-                          className={cx("friend-display", "mb-3", "py-3", "rounded-3")}
+                          className={cx(
+                            "friend-display",
+                            "mb-3",
+                            "py-3",
+                            "rounded-3",
+                            "mx-3",
+                            "mx-sm-0"
+                          )}
                           style={{
                             backgroundColor: `${user?.id===addedFriendId?"#cccccc3a":"#fff"}`,
                             
@@ -113,7 +120,7 @@ function AddFriendModal(props) {
                           onClick={() => handleBlockUser(user?.id)}
                         >
                           <div className="row">
-                            <div className="col-2 d-flex justify-content-center">
+                            <div className="col-3 col-lg-2 d-flex justify-content-center">
                               <div className={cx("friend-avatar-container")}>
                                 <img
                                   src={
@@ -131,7 +138,7 @@ function AddFriendModal(props) {
                                 />
                               </div>
                             </div>
-                            <div className="col-8 px-3 py-2">
+                            <div className="col-9 col-lg-10 px-3 py-2">
                               <h3 style={{color: `${user?.id===addedFriendId?"#000":"#aaa"}`}} className={cx("friend-name", "my-0")}>
                                 {user?.username}
                               </h3>

@@ -4,6 +4,7 @@ import { useUserContext } from "../../context/UserContext";
 import {useLocation} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Follower from "../../component/Layout/ProfileLayout/Follower";
+import AddFriendModal from "../../component/AddFriendModal";
 
 const cx = classNames.bind(Style);
 
@@ -23,7 +24,6 @@ function Profile() {
   }, [pathname]);
   const toggleModalHandle = () => {
     setModalState(!modalState);
-    alert("hello");
   };
 
 
@@ -39,6 +39,9 @@ function Profile() {
       )}
     >
       <div className={cx("profile-container", "my-3")}>
+        <div className={cx("d-none", { ["show"]: modalState })}>
+          <AddFriendModal clickToOpenHandle={toggleModalHandle} />
+        </div>
         <div className={cx("user-infor-section", "my-3", "pb-4")}>
           <div className="d-flex justify-content-between ">
             <div>
