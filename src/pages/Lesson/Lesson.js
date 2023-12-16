@@ -21,7 +21,7 @@ import DontClosePopup from "../../component/Popup/DontClosePopup";
 const cx = classNames.bind(Style);
 
 function Lesson() {
-  const {type, questionType} = useParams();
+  const {type, questionType, lessonNumber} = useParams();
   const {testDetail,
           questionNumber,
           score,
@@ -55,7 +55,6 @@ function Lesson() {
   // This state use for storing choose answer
   const [answerActive, setAnswerActive] = useState([]);
   const [chosenAnswer, setChosenAnswer] = useState([]);
-  const {lessonNumber} = useParams();
   const hasMounted = useRef(true);
 
   useEffect(() => {
@@ -83,7 +82,7 @@ function Lesson() {
 
   useEffect(() => {
     const fetchData = async() => {
-      const questionDetail = await getQuestion(lessonNumber, player?.id, handleShowPopup);
+      const questionDetail = await getQuestion(type, player?.id, handleShowPopup);
       setQuestion(questionDetail);
     }
     fetchData();

@@ -28,7 +28,7 @@ export const Timer = () => {
   useEffect(() => {
     let timerStorage = localStorage.getItem("timer");
     if(!timerStorage){
-      timerStorage = testDetail?.interval;
+      timerStorage = testDetail?.interval.split(" ")[0];
     }
     setInputMinutes(timerStorage);
     setRemainingTime(inputMinutes * 60);

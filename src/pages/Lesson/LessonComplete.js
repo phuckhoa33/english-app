@@ -65,7 +65,7 @@ function LessonComplete() {
                       alt=""
                       className="me-3"
                     />
-                    <span>{Math.floor(score/scoreTotalOfTest*100)}%</span>
+                    <span>{score}%</span>
                   </div>
                 </div>
               </div>

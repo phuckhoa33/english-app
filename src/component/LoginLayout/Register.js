@@ -31,6 +31,20 @@ function Register() {
   // functions
   // Function for change value input in field 
   const handleChangeField = (e) => {
+    if(e.target.name === "password"){
+      const newPassword = e.target.value;
+      const hasUpperCase = /[A-Z]/.test(newPassword);
+      const hasLowerCase = /[a-z]/.test(newPassword);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+      const isLengthValid = newPassword.length >= 10;
+      if(!(hasUpperCase && hasLowerCase && hasSpecialChar && isLengthValid) && newPassword !== ""){
+        setErrorNotification("Mật khẩu của bạn không đúng định dạng.")
+
+      }
+      else {
+        setErrorNotification("");
+      }
+    }
     setFormValue({...formValue, [e.target.name]: e.target.value});
   }
 

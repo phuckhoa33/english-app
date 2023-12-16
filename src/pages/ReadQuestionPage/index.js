@@ -54,7 +54,7 @@ function ReadQuestionPage() {
             </div>
             <div className="d-flex justify-content-center align-items-center">
               <Link
-                to={`/loading/lesson1/read/${testId}`}
+                to={`/loading/${testType}/read/${testId}`}
                 className={cx("btn", "getting-to-test-btn", "py-3", "my-3")}
               >
                 <FontAwesomeIcon icon={faPencilAlt} className="pe-2" /> Vào Thi

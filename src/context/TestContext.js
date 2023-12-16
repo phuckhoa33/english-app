@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import { createNewStreak, getAllTestByTestType, getAnswersByChatGPT, getRandomTest, getTest } from "../axios/userAxios";
+import { createNewStreak, getAllTestByTestType, getAnswersByChatGPT, getQuestionsInBlockWithBlockId, getRandomTest, getTest } from "../axios/userAxios";
 import { useNavigate } from "react-router";
 import { useUserContext } from "./UserContext";
+import { useCourseContext } from "./CourseContext";
 const TestContext = createContext();
 
 // Initial a test for deploy random question in this course for basic test
@@ -9,6 +10,14 @@ const initialTest =  {
     title: "Bài thực hành cơ bản của khóa học",
     description: "Chúng ta hãy ôn lại những bài học mà ta đã học qua dưới dạng các bài test",
     questionAmount: "random",
+    interval: "60"
+}
+
+
+const levelUpTest = {
+    title: "Bài test để giúp bạn chuyển qua block mới",
+    description: "Chúng ta hãy ôn lại những bài học mà ta đã học qua dưới dạng các bài test",
+    questionAmount: "90",
     interval: "60"
 }
 
@@ -61,8 +70,8 @@ export const TestProvider = ({children}) => {
     const [tests, setTests] = useState([]);
 
     const navigate = useNavigate();
-    const {player, updatePlayer, setPlayer, createNewAchievement, user} = useUserContext();
-
+    const {player, updatePlayer, setPlayer, createNewAchievement} = useUserContext();
+    const {blocks} = useCourseContext();
 
 
     const getAllTestAtTestType = async(testType) => {
@@ -84,9 +93,21 @@ export const TestProvider = ({children}) => {
         if(checked) {
             if(testType==="randomTest" || testType==="entryTest"){
                 const {data} = await getRandomTest(testId);
-                console.log(data);
                 testDetailStorage = initialTest;
                 questionsStorage = data?.data?.questions;
+            }
+            else if(testType === "levelUp") {
+                const levelOfPlayer = player?.currentLevel?.split('.');
+
+                const blockNumber = Number.parseInt(levelOfPlayer[1]);
+
+                const currentBlockOfPlayer = blocks[blockNumber];
+                const {data} = await getQuestionsInBlockWithBlockId(currentBlockOfPlayer?.id);
+                
+                console.log(data);
+                
+                testDetailStorage = levelUpTest;
+                questionsStorage = data?.data;
             }
             else {
                 const {data} = await getTest(testId);
@@ -124,7 +145,9 @@ export const TestProvider = ({children}) => {
     // }
 
     const getQuestion = async(testype, playerId, funcShow) => {
-        if(questionNumber > questions?.length || (questions[questionNumber] === undefined && questionNumber !== 0)) {
+        if(questionNumber > questions?.length 
+            || (questions[questionNumber] === undefined 
+                && questionNumber !== 0)) {
             
             if(skippedQuestions?.length === 0 || skippedQuestionNumber===skippedQuestions?.length) {
 
@@ -143,6 +166,9 @@ export const TestProvider = ({children}) => {
                 return skippedQuestions[skippedQuestionNumber];
             }
         }
+        else {
+            navigate(`/lesson/${testype}/${questions[questionNumber]?.questionType}/${questions[questionNumber]?.id}`)
+        }
 
         if(player?.id) {
             createNewStreakItem(playerId);
@@ -154,12 +180,11 @@ export const TestProvider = ({children}) => {
         const scoreTotal = questions?.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.score;
         }, 0);
-        
-        if(score/scoreTotal>= 0.8){
+        if(score/scoreTotal>= 0.8 && testype.includes("lesson")){
             player.expPoint += 10;
             player.score += 5;
 
-            player.level = levelUp(player?.level);
+            player.level = levelUp(player?.currentLevel, testype, scoreTotal);
             setPlayer(player);
 
         }
@@ -169,6 +194,17 @@ export const TestProvider = ({children}) => {
                 score,
                 sourceId: "",
                 title: "Hoàn thành bài học với điểm tối đa"
+            }
+
+            await createNewAchievement(achivement);
+        }
+        else if((testype.includes("test") || testype.includes("practice"))
+        && score/scoreTotal > 0.8 ){
+            const achivement = {
+                playerId,
+                score,
+                sourceId: testDetail?.id,
+                title: "Hoàn thành bài kiểm tra"
             }
 
             await createNewAchievement(achivement);
@@ -187,14 +223,16 @@ export const TestProvider = ({children}) => {
     }
 
 
-    const levelUp = (level) => {
+    const levelUp = (level, testtype, scoreTotal) => {
         let levelArray = level.split(".");
         let courseLevel = Number.parseInt(levelArray[0]);
         let blockLevel = Number.parseInt(levelArray[1]);
         let lessonLevel = Number.parseInt(levelArray[2]);
 
-        lessonLevel += 1;
-        if(lessonLevel === 9) {
+        if(Number.parseInt(testtype[7])!==lessonLevel){
+            lessonLevel += 1;
+        }
+        if(lessonLevel === 9 && (testtype === "levelUp" && score/scoreTotal > 0.8)) {
             blockLevel += 1;
             lessonLevel = 0
             if(blockLevel === 3) {

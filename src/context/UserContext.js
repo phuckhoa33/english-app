@@ -32,7 +32,7 @@ export const UserProvider = ({children}) => {
             let account = JSON.parse(localStorage.getItem("account"));
             if(account === null) {
                 account = {
-                    level: "1.0.0",
+                    currentLevel: "1.0.0",
                     currentLesson: 1,
                     currentBlock: 1,
                     currentCourse: 1,
@@ -42,12 +42,12 @@ export const UserProvider = ({children}) => {
                 }
                 
             }
-            console.log(account);
+            const courseNumber = account.currentLevel.split(".")[0];
             localStorage.setItem("account", JSON.stringify(account));
             setHearts(account.hearts);
             setPlayer(account);
             setStreak(account.streak);
-            getLessonsAndBlocksAndLessons(account?.level);
+            getLessonsAndBlocksAndLessons(courseNumber);
         }
         
     }
