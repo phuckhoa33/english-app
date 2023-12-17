@@ -67,7 +67,7 @@ export const BlockLearnPage = ({block, index, level}) => {
         const currentLevelInPlayer = player?.currentLevel?.split(".");
 
         const blockNumber = Number.parseInt(currentLevelInPlayer[1]);
-        if(blockNumber===index) {
+        if(blockNumber===index-1) {
           const lessonDetail = lessons?.find(lesson => lesson?.id === lessonNumber); 
           navigate(`/loading/lesson${lessonDetail?.title}/read/${lessonNumber}`);
 
