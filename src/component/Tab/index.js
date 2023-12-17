@@ -18,7 +18,7 @@ function Tabs() {
   const [paymentToggle, setPaymentToggle] = useState(1);
   const [showOtherCurrency, setShowOtherCurrency] = useState("");
   const {paymentDetail, setPaymentDetail, payBillApi, saveBillDetail} = usePaymentContext();
-  const {updateUser} = useUserContext();
+  const {updateUser, player, setPlayer, updatePlayer} = useUserContext();
   
   const navigate = useNavigate();
   
@@ -57,6 +57,12 @@ function Tabs() {
   const onApprove = async(data, actions) => {
     const order = await actions.order.capture();
     await payBillApi();
+    const scoreOfPlayer = player?.score;
+    setPlayer({...player, score: scoreOfPlayer+500});
+
+    await updatePlayer();
+
+
     updateUser("", null, true);
     if(order) {
       localStorage.removeItem("paymentDetail");

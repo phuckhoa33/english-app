@@ -39,29 +39,32 @@ export const BlockLearnPage = ({block, index, level}) => {
 
 
     const checkAndRestartLessonColors = () => {
-      const currentLevel = player?.currentLevel.split(".");
+      const currentLevel = player?.currentLevel?.split(".");
 
-      const lessonNumberInLevel = Number.parseInt(currentLevel[2]);
-      const blockNumberInLevel = Number.parseInt(currentLevel[1]);
-      let colorLessonsTemplate = lessonColors;
+      if(currentLevel?.length > 0) {
 
-      for(let i = 0; i < 9; i++) {
-        if(blockNumberInLevel === index-1) {
-          let result = false;
-          if(i <= lessonNumberInLevel-1){
-            result = true;
+        const lessonNumberInLevel = Number.parseInt(currentLevel[2]);
+        const blockNumberInLevel = Number.parseInt(currentLevel[1]);
+        let colorLessonsTemplate = lessonColors;
+  
+        for(let i = 0; i < 9; i++) {
+          if(blockNumberInLevel === index-1) {
+            let result = false;
+            if(i <= lessonNumberInLevel-1){
+              result = true;
+            }
+            colorLessonsTemplate[index-1][i] = result;
           }
-          colorLessonsTemplate[index-1][i] = result;
         }
+        colorLessonsTemplate[index-1][0] = true;
+        setLessonColors(colorLessonsTemplate);
       }
-      colorLessonsTemplate[index-1][0] = true;
-      setLessonColors(colorLessonsTemplate);
     }
 
 
     const handleClickLesson = (e, lessonNumber) => {
         e.preventDefault();
-        const currentLevelInPlayer = player?.currentLevel.split(".");
+        const currentLevelInPlayer = player?.currentLevel?.split(".");
 
         const blockNumber = Number.parseInt(currentLevelInPlayer[1]);
         if(blockNumber===index) {

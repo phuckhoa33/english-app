@@ -95,7 +95,7 @@ function Task() {
 
               <Link
                 to={contents[checkedUser][3]}
-                className={cx("premium-submit-btn", "btn", "rounded-4")}
+                className={cx("premium-submit-btn", "btn", "rounded-4", "fs-5")}
               >
                 {contents[checkedUser][2]}
               </Link>

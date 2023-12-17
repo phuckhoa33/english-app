@@ -30,7 +30,6 @@ export const PaymentProvider = ({children}) => {
 
     const payBillApi = async() => {
         const {data} = await payBill(paymentDetail);
-        console.log(data);
     }
 
     const saveBillDetail = () => {

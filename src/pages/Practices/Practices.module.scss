@@ -83,3 +83,62 @@
     }
 
 }
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Adjust the z-index as needed to ensure the overlay is on top */
+}
+
+.overlay-content {
+  /* Customize overlay content styles */
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.overlay-container {
+    position: relative;
+    width: 100%; /* Điều chỉnh theo ý muốn */
+    height: 500px; /* Điều chỉnh theo ý muốn */
+    overflow: hidden; /* Để overlay không tràn ra khỏi khung chứa */
+  }
+  
+  .content {
+    /* Tùy chỉnh kiểu dáng nội dung */
+    // background: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Màu nền semi-transparent đen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    cursor: pointer; /* Thêm con trỏ để người dùng biết rằng có thể nhấp để đóng overlay */
+  }
+  
+  .overlay-content {
+    /* Tùy chỉnh kiểu dáng nội dung overlay */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  

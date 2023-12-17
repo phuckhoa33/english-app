@@ -87,6 +87,8 @@ function Sidebar() {
               className={cx(
                 "my-4",
                 "nav-item",
+                "d-none",
+                "d-sm-flex",
                 "d-flex",
                 "justify-content-center",
                 "align-items-center"

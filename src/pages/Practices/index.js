@@ -4,14 +4,13 @@ import Style from "./Practices.module.scss";
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 import { useUserContext } from "../../context/UserContext";
+import blockImage from '../../assets/images/block.png';
 
 const cx = classNames.bind(Style);
 
 function Tests() {
   const navigate = useNavigate();
   const {user} = useUserContext();
-
-  console.log(user);
   const handleClickToPremium = () => {
   
     if(user){
@@ -26,7 +25,7 @@ function Tests() {
   return (
     <>
       <div className="container justify-content-center align-items-center d-flex">
-        <div className={cx("practice-section-container")}>
+        <div className={cx("practice-section-container", )}>
           {!user?.premium && (
             <div className={cx("card", "card-container", "my-4")}>
               <div className="card-body">
@@ -62,77 +61,91 @@ function Tests() {
             </div>
           )}
             
+          <div className={cx("overlay-container")}>
+            {!user?.premium && (
+              <div className={cx("overlay")}>
+                <div className={cx("overlay-content")}>
+                  <img src={blockImage} alt="" width={30}/>
+                  {/* Additional content goes here */}
+                </div>
+              </div>
 
-         
-          <h1
-            className={cx("advance-practice-section-sub-title", "pb-3", "ps-4", "mt-5")}
-          >
-            Chứng chỉ Quốc Tế
-          </h1>
+            )}
+            <div className={cx("content")}>
 
-          <div className="d-flex flex-column">
+              <h1
+                className={cx("advance-practice-section-sub-title", "pb-3", "ps-4", "mt-5")}
+              >
+                Chứng chỉ Quốc Tế
+              </h1>
 
-            <div className={cx("border-top")}>
-              <Link
-                to={`/allTestOfType/ielts`}
-                className={cx(
-                  "pratice-section",
-                  "p-4",
-                  "btn",
-                  "text-start",
-                  "THPTQG-tests-section"
-                )}
-              >
-                <h1 className={cx("title")}>Ielts</h1>
-                <small className={cx("desc")}>
-                  Thử thách bản thân với bài kiểm tra chuẩn IELTS
-                </small>
-              </Link>
-            </div><div className={cx("border-top")}>
-              <Link
-                to={"/allTestOfType/toiec"}
-                className={cx(
-                  "pratice-section",
-                  "p-4",
-                  "btn",
-                  "text-start",
-                  "THPTQG-tests-section"
-                )}
-              >
-                <h1 className={cx("title")}>Toeic</h1>
-                <small className={cx("desc")}>
-                Thử thách bản thân với bài kiểm tra chuẩn TOEIC
-                </small>
-              </Link>
-            </div>  
-            <h1
-              className={cx(
-                "advance-practice-section-sub-title",
-                "py-3",
-                "ps-4"
-              )}
-            >
-              Ôn thi THPTQG
-            </h1>
-            <div className={cx("border-top")}>
-              <Link
-                to={"/allTestOfType/university"}
-                className={cx(
-                  "pratice-section",
-                  "p-4",
-                  "btn",
-                  "text-start",
-                  "THPTQG-tests-section"
-                )}
-              >
-                <h1 className={cx("title")}>Tổng hợp các bài thi THPTQG</h1>
-                <small className={cx("desc")}>
-                  Tổng hợp các bài thi THPTQG của các năm gần đây giúp ôn tập và
-                  rèn luyện tư duy để chuẩn bị cho các kỳ thi sau này
-                </small>
-              </Link>
+              <div className="d-flex flex-column">
+
+                <div className={cx("border-top")}>
+                  <Link
+                    to={`/allTestOfType/ielts`}
+                    className={cx(
+                      "pratice-section",
+                      "p-4",
+                      "btn",
+                      "text-start",
+                      "THPTQG-tests-section"
+                    )}
+                  >
+                    <h1 className={cx("title")}>Ielts</h1>
+                    <small className={cx("desc")}>
+                      Thử thách bản thân với bài kiểm tra chuẩn IELTS
+                    </small>
+                  </Link>
+                </div><div className={cx("border-top")}>
+                  <Link
+                    to={"/allTestOfType/toiec"}
+                    className={cx(
+                      "pratice-section",
+                      "p-4",
+                      "btn",
+                      "text-start",
+                      "THPTQG-tests-section"
+                    )}
+                  >
+                    <h1 className={cx("title")}>Toeic</h1>
+                    <small className={cx("desc")}>
+                    Thử thách bản thân với bài kiểm tra chuẩn TOEIC
+                    </small>
+                  </Link>
+                </div>  
+                <h1
+                  className={cx(
+                    "advance-practice-section-sub-title",
+                    "py-3",
+                    "ps-4"
+                  )}
+                >
+                  Ôn thi THPTQG
+                </h1>
+                <div className={cx("border-top")}>
+                  <Link
+                    to={"/allTestOfType/university"}
+                    className={cx(
+                      "pratice-section",
+                      "p-4",
+                      "btn",
+                      "text-start",
+                      "THPTQG-tests-section"
+                    )}
+                  >
+                    <h1 className={cx("title")}>Tổng hợp các bài thi THPTQG</h1>
+                    <small className={cx("desc")}>
+                      Tổng hợp các bài thi THPTQG của các năm gần đây giúp ôn tập và
+                      rèn luyện tư duy để chuẩn bị cho các kỳ thi sau này
+                    </small>
+                  </Link>
+                </div>
+              </div>
             </div>
+
           </div>
+         
         </div>
       </div>
     </>

@@ -42,7 +42,7 @@ export const UserProvider = ({children}) => {
                 }
                 
             }
-            const courseNumber = account.currentLevel.split(".")[0];
+            const courseNumber = account?.currentLevel?.split(".")[0];
             localStorage.setItem("account", JSON.stringify(account));
             setHearts(account.hearts);
             setPlayer(account);
