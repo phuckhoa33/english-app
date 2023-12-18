@@ -36,7 +36,7 @@ export const ResetPasswordPage = () => {
             if(result?.expired){
                 navigate("/learn");
             }
-            setUser(result.userDetails);
+            setUser(result?.userDetails);
         }
 
         fetchData();

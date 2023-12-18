@@ -9,7 +9,7 @@ const cx = classNames.bind(Style);
 
 
 function AddFriendModal(props) {
-  const { users, setUsers, addNewFriend, getUsersByCondition, user, getFriends } = useUserContext();
+  const { users, setUsers, getUsersByCondition, user, sendFriendRequest} = useUserContext();
   const [addedFriendId, setAddedFriendId] = useState(null);
   const [search, setSearch] = useState("");
 
@@ -32,8 +32,8 @@ function AddFriendModal(props) {
 
 
   const handleAddNewFriend = () => {
-    addNewFriend(addedFriendId);
-    getFriends(user?.id);
+    sendFriendRequest(addedFriendId);
+
 
   }
   
@@ -83,7 +83,7 @@ function AddFriendModal(props) {
                 value={search}
                 onChange={handleSearch}
 
-                placeholder={addedFriendId!==null?users?.find(user => user.id === addedFriendId).username:null}
+                placeholder={addedFriendId!==null?users?.find(user => user?.id === addedFriendId).username:null}
               />
               <button className={cx("search-user-btn", "p-2")}>
                 <FontAwesomeIcon icon={faSearch} />

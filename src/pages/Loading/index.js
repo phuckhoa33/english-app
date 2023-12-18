@@ -6,9 +6,12 @@ import { Spinner } from '../../component/Spinner/Spinner';
 import {useParams, useNavigate} from 'react-router-dom';
 import { useTestContext } from '../../context/TestContext';
 import { useCourseContext } from '../../context/CourseContext';
+import { usePracticeContext } from '../../context/PracticeContext';
 
 export const LoadingPage = () => {
     const {type, questionType, lessonNumber} = useParams();
+    const {course} = useCourseContext();
+    const {getPractices} = usePracticeContext();
     const {getTestByType} = useTestContext();
     const {loading} = useCourseContext();
     const navigate = useNavigate();
@@ -17,6 +20,7 @@ export const LoadingPage = () => {
         const fetchData = async() => {
             if(type !== undefined && questionType!== undefined && lessonNumber!== undefined){
                 await getTestByType(type,lessonNumber); 
+                await getPractices(course?.id);
             }
         }
         fetchData();

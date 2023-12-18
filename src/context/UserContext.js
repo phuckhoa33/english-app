@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { createContext } from "react";
 import { addFriend, checkTokenResetPasswordApi, createAchivement, getFriend, getLeaderBoard, getPlayer, getStreaks, getUser, getUserExceptUserId, login, sendEmailForResetPasswordApi, updatePlayerApi, updateUserApi } from "../axios/userAxios";
 import { useCourseContext } from "./CourseContext";
+import NotificationReducer from "../reducer/NotificationReducer";
+import {db} from '../Firebase';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query } from "firebase/firestore";
 
 const UserContext = createContext();
 
@@ -17,11 +20,43 @@ export const UserProvider = ({children}) => {
     const [friends, setFriends] = useState([]);
     const [users, setUsers] = useState([]);
     const [ranks, setRanks] = useState([]);
+    const [friendRequests, dispatchFriendRequests] = useReducer(NotificationReducer, []);
+
+
 
     useEffect(() => {
         registerUser();
         registerAdmin();
-    }, [])
+        const q = query(collection(db, "friendRequest"));
+        const unsub = onSnapshot(q, (querySnapshot) => {
+          let friendRequestFetch = [];
+          querySnapshot.forEach((doc) => {
+            friendRequestFetch.push({ ...doc.data(), id: doc.id });
+          });
+
+          dispatchFriendRequests({ type: 'SET', friendRequests: friendRequestFetch });
+        });
+        
+        
+
+    
+        // Unsubscribe from the snapshot listener when the component unmounts
+        return () => unsub();
+    }, []);
+
+
+    useEffect(() => {
+        dispatchFriendRequests({type: 'SET_DEPEND_ON_USER_ID', id: user?.id});
+        const friendRequestIds = friendRequests.map(friendRequest => friendRequest.requestedUserId);
+        const friendsIds = friends.map(friend => friend.id);
+
+
+        const conditionIds = friendRequestIds.concat(friendsIds);
+
+        const filterUsers = users.filter(u => conditionIds.indexOf(u.id) !== -1);
+        setUsers(filterUsers);
+    }, [user])
+
     
     const checkPlayerAndGetCourse = () => {
         if(player){
@@ -196,6 +231,26 @@ export const UserProvider = ({children}) => {
         console.log(data);
     }
 
+
+    const sendFriendRequest = async(addedFriendId) => {
+        const newAddFriendRequest = {...user, userId: addedFriendId, requestedUserId: user?.id};
+        dispatchFriendRequests({type: 'CREATE', newAddFriendRequest});
+        await addDoc(collection(db, "friendRequest"), newAddFriendRequest);
+    }
+
+
+    const refuseFriendRequest = async(friendRequest) => {
+        const id = friendRequest.requestedUserId;
+        dispatchFriendRequests({type: "DELETE", id});
+        await deleteDoc(doc(db, "friendRequest", id));
+    }
+
+    const acceptFriendRequest = async(friendRequest) => {
+        console.log(friendRequest);
+        await refuseFriendRequest(friendRequest);
+        await addNewFriend(friendRequest.requestedUserId);
+    }
+
     return (
         <UserContext.Provider
             value={{
@@ -217,6 +272,10 @@ export const UserProvider = ({children}) => {
                 createNewAchievement,
                 checkProgressOfPlayer,
                 addNewFriend,
+                friendRequests,
+                sendFriendRequest,
+                refuseFriendRequest,
+                acceptFriendRequest,
                 checkChangeProperty,
                 getRankOfCurrentPlayer,
                 setUsers,

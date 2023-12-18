@@ -120,9 +120,7 @@
                 width: 100%;
                 &:hover {
                     background-color: #cccccc2a;
-                    .item-link {
-                         
-                    }
+                    
                 }
                 
                 
@@ -155,6 +153,9 @@
 @media screen and (max-width : 576px){
     .nav{
         width: 0 !important;
+    }
+    .nav-item{
+        width: 80% !important;
     }
     .sub-menu{
         top: -228px !important;

@@ -19,7 +19,7 @@ function Follower(props) {
   const [showFriendFilter, setShowFriendFilter] = useState(false);
   const [showFriendRequestReceived, setShowFriendRequestReceived] =
     useState(false);
-  const {friends, getUsersByCondition, user} = useUserContext();
+  const {friends, getUsersByCondition, user, friendRequests, refuseFriendRequest, acceptFriendRequest} = useUserContext();
 
   const showFriendFilterHandle = () => {
     setShowFriendFilter(!showFriendFilter);
@@ -60,6 +60,9 @@ function Follower(props) {
                       >
                         <FriendRequestReceivePopup
                           ClickToShow={ClickToShowFriendRequestReceived}
+                          friendRequests={friendRequests}
+                          refuseFriendRequest={refuseFriendRequest}
+                          acceptFriendRequest={acceptFriendRequest}
                         />
                       </div>
                       <button

@@ -213,7 +213,7 @@ function Setting() {
                 }}>
                   <h1>
                     <a
-                      href=""
+                      href="/"
                       className={cx("btn", "setting-account-btn", "ms-5")}
                     >
                       {" "}
@@ -227,7 +227,7 @@ function Setting() {
                 <div className={cx("col-9", "ps-5", " mb-4")}>
                   <h1>
                     <a
-                      href=""
+                      href="/"
                       className={cx(
                         "btn",
                         "setting-account-btn",

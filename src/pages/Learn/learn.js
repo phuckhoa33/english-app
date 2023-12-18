@@ -38,7 +38,7 @@ function Learn() {
   
   return (
     <div>
-      <div className={cx("container", "my-4")}>
+      <div className={cx("container-fluid", "my-4")}>
         {/* course section  */}
         <>
             {blocks?.length > 0 ? (

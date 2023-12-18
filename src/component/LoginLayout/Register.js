@@ -33,25 +33,34 @@ function Register() {
   const handleChangeField = (e) => {
     if(e.target.name === "password"){
       const newPassword = e.target.value;
-      const hasUpperCase = /[A-Z]/.test(newPassword);
-      const hasLowerCase = /[a-z]/.test(newPassword);
-      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
-      const isLengthValid = newPassword.length >= 10;
-      if(!(hasUpperCase && hasLowerCase && hasSpecialChar && isLengthValid) && newPassword !== ""){
-        setErrorNotification("Mật khẩu của bạn không đúng định dạng.")
-
-      }
-      else {
-        setErrorNotification("");
-      }
+      checkPasswordFormat(newPassword);
+      
     }
     setFormValue({...formValue, [e.target.name]: e.target.value});
+  }
+
+  const checkPasswordFormat = (newPassword) => {
+    const hasUpperCase = /[A-Z]/.test(newPassword);
+    const hasLowerCase = /[a-z]/.test(newPassword);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+    const isLengthValid = newPassword.length >= 10;
+    if(!(hasUpperCase && hasLowerCase && hasSpecialChar && isLengthValid) && newPassword !== ""){
+      setErrorNotification("Mật khẩu của bạn không đúng định dạng.")
+      return false;
+    }
+    else {
+      setErrorNotification("");
+      return true;
+    }
   }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     if(email==="" || password==="" || username===""){
       setErrorNotification("Some fields are empty!!")
+      return;
+    }
+    else if(!checkPasswordFormat(password)){
       return;
     }
     formValue.social = "none";  
