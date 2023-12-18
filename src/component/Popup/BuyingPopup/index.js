@@ -13,6 +13,7 @@ function BuyingPopup(props) {
   const handleSubmitBuy = async() => {
     player.score -= props.price;
     await updatePlayer(player);
+    props.ClickToClosePopup();
   }
 
   return (
