@@ -43,12 +43,13 @@ function Tabs() {
     return actions.order.create({
       purchase_units: [
         {
-          description: paymentDetail.description,
+          reference_id: 'default',
           amount: {
-            value: paymentDetail.total
-          }
-        }
-      ]
+            currency_code: paymentDetail.currency,
+            value: paymentDetail.total, // Replace with the actual amount
+          },
+        },
+      ],
     })
 
 
@@ -68,6 +69,11 @@ function Tabs() {
       localStorage.removeItem("paymentDetail");
       navigate(`/payment/success/${order.id}`);
     }
+  }
+
+  const onError = async(err) => {
+    navigate("/payment/error")
+    console.log(err); 
   }
 
   return (
@@ -356,7 +362,7 @@ function Tabs() {
                   <PayPalButtons 
                     createOrder={(data, actions) => createOrder(data, actions)}
                     onApprove={(data, actions) => onApprove(data, actions)}
-                    onError={(err) => navigate("/payment/errror")}
+                    onError={err => onError(err)}
                   />
 
                 </PayPalScriptProvider>

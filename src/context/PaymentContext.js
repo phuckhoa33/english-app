@@ -16,8 +16,8 @@ const initialPaymentDetail = {
     method: null,
     intent: null,
     description: null,
-    cancelUrl: "http://localhost:3000/payment/error",
-    successUrl: "http://localhost:3000/payment/success",    
+    cancelUrl: "https://meolearn.vercel.app/payment/error",
+    successUrl: "https://meolearn.vercel.app/payment/success",      
     userId: null
 }
 
