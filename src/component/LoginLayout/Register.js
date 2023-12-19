@@ -7,6 +7,9 @@ import { ErrorNotification } from "./ErrorNotification";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import Spinner from 'react-bootstrap/Spinner';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { faEyeDropper, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(LoginLayoutScss);
 
 function Register() {
@@ -18,6 +21,8 @@ function Register() {
   })
   const [errorNotification, setErrorNotification] = useState("");
   const [loading, setLoading] = useState(false);
+  const [eyeIcon, setEyeIcon] = useState(faEye);
+  const [typeOfPasswordField, setTypeOfPasswordField] = useState("password");
   const navigate = useNavigate();
   // variables 
   const { username, password, email } = formValue;
@@ -78,6 +83,16 @@ function Register() {
     setLoading(false);
   }
 
+  const handleToggle = () => {
+    if (typeOfPasswordField==='password'){
+       setEyeIcon(faEyeSlash);
+       setTypeOfPasswordField('text');
+    } else {
+      setEyeIcon(faEye);
+      setTypeOfPasswordField('password');
+    }
+ }
+
   return (
     <div className={cx("container", "sign-in-container")}>
       <h2 className={cx("sign-in-heading", "text-center", "pb-5")}>
@@ -123,7 +138,7 @@ function Register() {
         </div>
         <div className={cx("mb-5", "position-relative")}>
           <input
-            type="password"
+            type={typeOfPasswordField}
             className={cx(
               "password-input",
               "form-control",
@@ -137,8 +152,9 @@ function Register() {
             onChange={handleChangeField}
             required
           />
-          <div className={cx("forgot-pw")}>
-            <a href="">icon</a>
+          <div className={cx("show-pw")} onClick={handleToggle}>
+            
+            <FontAwesomeIcon icon={eyeIcon} />
           </div>
           <ErrorNotification errorNotification={errorNotification}/>
         </div>

@@ -18,7 +18,7 @@ function SuperPackInformation() {
         )}
       >
         <div className={cx("super-inf-container")}>
-          <Link to={"/setting"} className={cx("back-to-setting-btn", "btn")}>
+          <Link to={"/setting"} className={cx("back-to-setting-btn", "btn","d-absolute" ,"d-xxl-none")}>
             Trở vể
           </Link>
           <div className={cx("card", "card-container", "my-4")}>

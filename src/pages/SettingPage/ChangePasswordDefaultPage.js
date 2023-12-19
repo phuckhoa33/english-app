@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUserContext } from "../../context/UserContext";
 import classNames from "classnames/bind";
 import Style from "./Setting.module.scss";
+import {Link} from "react-router-dom"
 import { SaveButton } from "../../component/Buttons/SaveButton";
 import { ErrorNotification } from "../../component/LoginLayout/ErrorNotification";
 
@@ -20,6 +21,9 @@ export const ChangePasswordDefaultPage = () => {
           )}
         >
           <div className={cx("change-pass-container", "my-3")}>
+          <Link to={"/setting"} className={cx("back-to-setting-btn", "btn","d-absolute" ,"d-xxl-none")}>
+            Trở vể
+          </Link>
             <h1 className={cx("setting-title", "my-3")}>Mật khẩu</h1>
             <div className="my-5">
               <div className="row">

@@ -50,12 +50,28 @@
 }
 .forgot-pw a{
     position: absolute;
-    bottom: 35%;
-    right: 8px;
+    text-transform: uppercase;
+    top: 50%;
+    right: 0;
     text-decoration: none;
     font-weight: 600;
     color: #ccc;
     font-size: 16px;
+    transform: translate(-50%,-50%);
+    &:hover{
+        color: #555;
+    }
+}
+.show-pw {
+    position: absolute;
+    text-transform: uppercase;
+    top: 33%;
+    right: 0;
+    text-decoration: none;
+    font-weight: 600;
+    color: #ccc;
+    font-size: 16px;
+    transform: translate(-50%,-50%);
     &:hover{
         color: #555;
     }

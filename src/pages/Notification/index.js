@@ -16,7 +16,7 @@ function Notification() {
         )}
       >
         <div className={cx("notification-container", "my-3")}>
-          <Link to={"/setting"} className={cx("back-to-setting-btn", "btn")}>
+          <Link to={"/setting"} className={cx("back-to-setting-btn", "btn","d-absolute" ,"d-xxl-none")}>
             Trở vể
           </Link>
           <div className="d-flex flex-row justify-content-between align-items-center">

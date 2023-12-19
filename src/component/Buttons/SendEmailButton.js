@@ -2,18 +2,19 @@ import classNames from "classnames/bind";
 import Style from "../../pages/SettingPage/Setting.module.scss";
 import { useState } from "react";
 import { useUserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import {Spinner} from 'react-bootstrap';
 
 const cx = classNames.bind(Style);
 
 export const SendEmailButton = ({email, setChecked}) => {
     const {sendEmailForResetPassword} = useUserContext();
-    
+    const [loading, setLoading] = useState(false);
 
 
     
 
     const handleClickSend = async() => {
+        setLoading(true);
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!String(email).toLocaleLowerCase().match(emailRegex)){
             setChecked({
@@ -26,11 +27,13 @@ export const SendEmailButton = ({email, setChecked}) => {
             validateEmail: null,
             running: true
         });
+
         await sendEmailForResetPassword(email);
         setChecked({
             validateEmail: true,
             running: false
         });
+        setLoading(false);
     }
 
     return (
@@ -39,7 +42,8 @@ export const SendEmailButton = ({email, setChecked}) => {
             disabled={email!==""?false:true} 
             onClick={handleClickSend}
         >
-            Gửi email
+            {loading?<Spinner/>:"Gửi email"}
+            
         </button>
     )
 }

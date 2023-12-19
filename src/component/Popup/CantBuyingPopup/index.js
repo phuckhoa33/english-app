@@ -68,7 +68,7 @@ function CantBuyingPopup(props) {
                     "rounded-4",
                     "buy-in-btn"
                   )}
-                  onClick={() => navigate("/learn")}
+                  onClick={() => navigate("/premium")}
                 >
                   Kiếm thêm Kim Cương
                 </button>
