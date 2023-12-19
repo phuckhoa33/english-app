@@ -108,7 +108,10 @@ function Sidebar() {
                 "rounded-4",
                 "text-center",
                 "text-md-start",
-                `${chosenItem==="learn"&&"isActive"}`
+                "d-flex",
+                "justify-content-center",
+                "align-items-center"
+                
               )} to="/learn">
                 <div className={cx("logo-container")}>
                   <img src={logo} alt="logo" className="img-fluid" />
