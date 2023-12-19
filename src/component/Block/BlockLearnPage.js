@@ -49,15 +49,32 @@ export const BlockLearnPage = ({block, index, level}) => {
   
         for(let i = 0; i < 9; i++) {
           if(blockNumberInLevel === index-1) {
-            let result = false;
             if(i <= lessonNumberInLevel-1){
-              result = true;
+              colorLessonsTemplate[index-1][i] = true;
             }
-            colorLessonsTemplate[index-1][i] = result;
           }
         }
         colorLessonsTemplate[index-1][0] = true;
+
+
+
+        const block1 = new Array(9).fill(true);
+        console.log(blockNumberInLevel);
+        if(blockNumberInLevel >= 1){
+
+          colorLessonsTemplate[0] = block1;
+
+          if(blockNumberInLevel >= 2) {
+            colorLessonsTemplate[1] = block1;
+          }
+
+
+        }
+
+        console.log(colorLessonsTemplate);
         setLessonColors(colorLessonsTemplate);
+
+        
       }
     }
 
@@ -67,7 +84,9 @@ export const BlockLearnPage = ({block, index, level}) => {
         const currentLevelInPlayer = player?.currentLevel?.split(".");
 
         const blockNumber = Number.parseInt(currentLevelInPlayer[1]);
-        if(blockNumber===index-1) {
+        console.log(blockNumber);
+        console.log(index);
+        if(blockNumber>=index) {
           const lessonDetail = lessons?.find(lesson => lesson?.id === lessonNumber); 
           navigate(`/loading/lesson${lessonDetail?.title}/read/${lessonNumber}`);
 

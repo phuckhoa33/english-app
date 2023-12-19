@@ -55,6 +55,8 @@ export const UserProvider = ({children}) => {
 
         const filterUsers = users.filter(u => conditionIds.indexOf(u.id) !== -1);
         setUsers(filterUsers);
+
+        checkPlayerAndGetCourse();
     }, [user])
 
     
@@ -107,8 +109,7 @@ export const UserProvider = ({children}) => {
             localStorage.removeItem('token');
             setUser(null);
         }
-
-        checkPlayerAndGetCourse();
+        
     }
 
     const getUsersByCondition = async(id) => {

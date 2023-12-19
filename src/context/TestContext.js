@@ -104,7 +104,7 @@ export const TestProvider = ({children}) => {
                 const currentBlockOfPlayer = blocks[blockNumber];
                 const {data} = await getQuestionsInBlockWithBlockId(currentBlockOfPlayer?.id);
                 
-                console.log(data);
+               
                 
                 testDetailStorage = levelUpTest;
                 questionsStorage = data?.data;
@@ -180,45 +180,47 @@ export const TestProvider = ({children}) => {
         const scoreTotal = questions?.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.score;
         }, 0);
-        if(score/scoreTotal>= 0.8 && testype.includes("lesson")){
-            player.expPoint += 10;
-            player.score += 5;
 
-            player.level = levelUp(player?.currentLevel, testype, scoreTotal);
-            setPlayer(player);
+        if(score/scoreTotal>= 0.8 ) {
 
-        }
-        else if(score === scoreTotal && player?.id) {
-            const achivement = {
-                playerId,
-                score,
-                sourceId: "",
-                title: "Hoàn thành bài học với điểm tối đa"
+            if(testype.includes("lesson")){
+                player.expPoint += 10;
+                player.score += 5;
+    
+                player.level = levelUp(player?.currentLevel, testype, scoreTotal);
+                setPlayer(player);
+    
             }
-
-            await createNewAchievement(achivement);
-        }
-        else if((testype.includes("test") || testype.includes("practice"))
-        && score/scoreTotal > 0.8 ){
-            const achivement = {
-                playerId,
-                score,
-                sourceId: testDetail?.id,
-                title: "Hoàn thành bài kiểm tra"
+            else if(score === scoreTotal && player?.id) {
+                const achivement = {
+                    playerId,
+                    score,
+                    sourceId: "",
+                    title: "Hoàn thành bài học với điểm tối đa"
+                }
+    
+                await createNewAchievement(achivement);
             }
-
-            await createNewAchievement(achivement);
+            else if((testype.includes("test") || testype.includes("practice"))
+            && score/scoreTotal > 0.8 ){
+                const achivement = {
+                    playerId,
+                    score,
+                    sourceId: testDetail?.id,
+                    title: "Hoàn thành bài kiểm tra"
+                }
+    
+                await createNewAchievement(achivement);
+            }
+            else if(testype === "levelUp"){
+                
+            }
         }
         
 
         if(player?.id){
             updatePlayer(player);
         }
-        else {
-            localStorage.setItem("account", JSON.stringify(player));
-
-        }
-
 
     }
 
@@ -236,8 +238,7 @@ export const TestProvider = ({children}) => {
             blockLevel += 1;
             lessonLevel = 0
             if(blockLevel === 3) {
-                courseLevel += 1;
-                blockLevel = 0;
+                blockLevel +=  1;
                 lessonLevel = 0;
             }
         }
