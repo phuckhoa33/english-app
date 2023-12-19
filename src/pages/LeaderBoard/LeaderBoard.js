@@ -26,7 +26,7 @@ function LeaderBoard() {
 
   return (
     <div>
-      <div className="container justify-content-center align-items-center d-flex">
+      <div className="container justify-content-center align-items-center d-flex mb-5 mb-sm-0 py-5 py-sm-0 ">
         <div className={cx("leaderboard-wrapper", "my-4", "position-relative")}>
           <div className=" justify-content-center align-items-center d-flex">
             <div className={cx("leaderboard-logo")}>

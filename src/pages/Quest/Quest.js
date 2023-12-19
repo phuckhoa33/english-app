@@ -116,11 +116,10 @@ function Quest() {
                               style={{width: `${100-Math.floor(userTasks[task?.id]/task?.completeExpPoint*100)}%`}}
                             >
                               
-                            </div>
                             <button
                               className={cx(
                                 "position-absolute",
-                                "receive-exp-when-complete-btn"
+                                "receive-exp-when-complete-btn","btn"
                               )}
                               onClick={() => ShowPopupHandle()}
                             >
@@ -129,6 +128,7 @@ function Quest() {
                                 alt=""
                               />
                             </button>
+                            </div>
                           </div>
                         </div>
                       </div>

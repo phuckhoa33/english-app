@@ -59,7 +59,6 @@ export const BlockLearnPage = ({block, index, level}) => {
 
 
         const block1 = new Array(9).fill(true);
-        console.log(blockNumberInLevel);
         if(blockNumberInLevel >= 1){
 
           colorLessonsTemplate[0] = block1;
@@ -70,8 +69,6 @@ export const BlockLearnPage = ({block, index, level}) => {
 
 
         }
-
-        console.log(colorLessonsTemplate);
         setLessonColors(colorLessonsTemplate);
 
         
@@ -84,8 +81,6 @@ export const BlockLearnPage = ({block, index, level}) => {
         const currentLevelInPlayer = player?.currentLevel?.split(".");
 
         const blockNumber = Number.parseInt(currentLevelInPlayer[1]);
-        console.log(blockNumber);
-        console.log(index);
         if(blockNumber>=index) {
           const lessonDetail = lessons?.find(lesson => lesson?.id === lessonNumber); 
           navigate(`/loading/lesson${lessonDetail?.title}/read/${lessonNumber}`);

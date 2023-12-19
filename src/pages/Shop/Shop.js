@@ -103,7 +103,7 @@ function Shop() {
                       className="w-100 h-100"
                     />
                   </div>
-                      <div className="col-7">
+                      <div className="col-10 col-md-7 mb-3 mb-lg-0">
                       <div className={cx("heart-item-title", "py-3")}>
                         Hồi phục Trái tim
                       </div>
@@ -112,7 +112,7 @@ function Shop() {
                         bài học
                       </p>
                     </div>
-                    <div className="col-3 d-flex align-items-center">
+                    <div className="col-12 col-md-3 d-flex align-items-center">
                       <button
                         className={cx(
                           "shop-purcherse-btn",
@@ -141,13 +141,13 @@ function Shop() {
                       className="w-100 h-100 "
                     />
                   </div>
-                  <div className="col-7">
+                  <div className="col-10 col-md-7 mb-3 mb-lg-0">
                     <div className={cx("heart-item-title", "py-3")}>
                       Trái tim Vô hạn
                     </div>
                     <p>Không bao giờ hết trái tim khi học với Super!</p>
                   </div>
-                  <div className="col-3 d-flex align-items-center">
+                  <div className="col-12 col-md-3 d-flex align-items-center">
                     <Link
                       to={"/premium"}
                       className={cx(
@@ -177,7 +177,7 @@ function Shop() {
                       className="w-100 h-100"
                     />
                   </div>
-                  <div className="col-7">
+                  <div className="col-10 col-md-7 mb-3 mb-lg-0">
                     <div className={cx("heart-item-title", "py-3")}>
                       Streak Freeze
                     </div>
@@ -189,7 +189,7 @@ function Shop() {
                       ngày bạn không có hoạt động nào.
                     </p>
                   </div>
-                  <div className="col-3 d-flex align-items-center">
+                  <div className="col-12 col-md-3 d-flex align-items-center">
                     <button
                       className={cx(
                         "shop-purcherse-btn",

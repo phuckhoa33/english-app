@@ -41,15 +41,39 @@ function Tabs() {
     localStorage.removeItem("paymentDetail");
     
     return actions.order.create({
-      purchase_units: [
+      "purchase_units": [
         {
-          reference_id: 'default',
-          amount: {
-            currency_code: paymentDetail.currency,
-            value: paymentDetail.total, // Replace with the actual amount
+          "amount": {
+            "currency_code": "USD",
+            "value": "273.9",
+            "breakdown": {
+              "item_total": {
+                "currency_code": "USD",
+                "value": "249"
+              },
+              "tax_total": {
+                "value": "24.9",
+                "currency_code": "USD"
+              }
+            }
           },
-        },
-      ],
+          "items": [
+            {
+              "name": "First Product Name",
+              "description": "Optional descriptive text..",
+              "unit_amount": {
+                "currency_code": "USD",
+                "value": "249"
+              },
+              "tax": {
+                "value": "24.9",
+                "currency_code": "USD"
+              },
+              "quantity": "1"
+            }
+          ]
+        }
+      ]
     })
 
 
